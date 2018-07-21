@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+
+	<meta charset="utf-8">
+	<!-- <base href="/"> -->
+
+	<title>Дартс</title>
+	<meta name="description" content="">
+
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	
+	<!-- Template Basic Images Start -->
+	<meta property="og:image" content="path/to/image.jpg">
+	<link rel="icon" href="img/favicon/favicon.ico">
+	<link rel="apple-touch-icon" sizes="180x180" href="img/favicon/apple-touch-icon-180x180.png">
+	<!-- Template Basic Images End -->
+	
+	<!-- Custom Browsers Color Start -->
+	<meta name="theme-color" content="#000">
+	<!-- Custom Browsers Color End -->
+
+	<link rel="stylesheet" href="css/main.min.css">
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+	<div id="app">
+	<div id="field" class="container text">
+		<div class="container x2">
+			<div
+				v-for="(sector, index) in sectors"
+				:key="sector.value"
+				:style="'transform: rotate(' + index * 18 + 'deg) skewY(' + 108 + 'deg)'"
+				:points="index * 2"
+				class="sector"
+				@click="shoot(sector.value * 2);"
+			></div>
+			<div class="container big">
+					<div
+						v-for="(sector, index) in sectors"
+						:key="sector.value"
+						:style="'transform: rotate(' + index * 18 + 'deg) skewY(' + 108 + 'deg)'"
+						:points="index"
+						class="sector"
+						@click="shoot(sector.value);"
+					></div>
+				<div class="container x3">
+						<div
+							v-for="(sector, index) in sectors"
+							:key="sector.value"
+							:style="'transform: rotate(' + index * 18 + 'deg) skewY(' + 108 + 'deg)'"
+							:points="index * 3"
+							class="sector"
+							@click="shoot(sector.value * 3)"
+						></div>
+					<div class="container small">
+							<div
+								v-for="(sector, index) in sectors"
+								:key="sector.value"
+								:style="'transform: rotate(' + index * 18 + 'deg) skewY(' + 108 + 'deg)'"
+								:points="index"
+								class="sector"
+								@click="shoot(sector.value)"
+							></div>
+						<div class="mid25"
+							@click="shoot(25);"
+						></div>
+						<div class="mid50"
+							@click="shoot(50);"
+							></div>
+					</div>
+				</div>		
+			</div>
+		</div>
+	</div>
+
+	<div class="players">
+		<div
+			v-for="player in players"
+			class="player"
+		>{{ player.name }} - {{ player.points }}</div>
+	</div>
+</div>
+	<script src="js/scripts.min.js"></script>
+
+</body>
+</html>

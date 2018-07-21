@@ -1,0 +1,136 @@
+@import "vars"
+@import "fonts"
+@import "libs"
+
+::placeholder
+	color: #666
+
+::selection
+	background-color: $accent
+	color: #fff
+
+#field
+	width: 600px
+	height: 600px
+	border-radius: 50%
+	background: $dark url(../img/numbers.png) no-repeat center center
+	box-sizing: border-box
+	margin-top: 0
+	position: relative
+	overflow: hidden
+	transform: rotateZ(-9deg)
+	&::before
+		display: block
+		position: absolute
+		width: 100%
+		height: 100%
+		margin: 0
+		background: url(../img/numbers.png) no-repeat center center
+	&.container
+		margin: 0
+		z-index: 20
+		&>.sector
+			border: none
+			vertical-align: top
+			color: #fff
+.container 
+	width: 550px
+	height: 550px
+	overflow: hidden !important
+	border-radius: 50%
+	position: relative
+	margin-top: 50%
+	margin-left: 50%
+	box-sizing: border-box
+	transform: translate(-50%, -50%)
+	border: 2px solid $border
+.x2
+	z-index: 1
+	&>.sector
+		&:nth-of-type(2n + 1)
+			background: $red
+			&:hover
+				background: $red + #ff0000
+		&:nth-of-type(2n)
+			background: $green
+			&:hover
+				background: $green + #114411
+.big
+	width: 500px
+	height: 500px
+	z-index: 2
+	&>.sector
+		&:nth-of-type(2n + 1)
+			background: $dark
+			&:hover
+				background: $dark + #222222
+		&:nth-of-type(2n)
+			background: $light
+			&:hover
+				background: $light - #333333
+.x3
+	width: 325px
+	height: 325px
+	z-index: 3
+	&>.sector
+		&:nth-of-type(2n + 1)
+			background: $red
+			&:hover
+				background: $red + #ff0000
+		&:nth-of-type(2n)
+			background: $green
+			&:hover
+				background: $green + #114411
+
+.small
+	width: 275px
+	height: 275px
+	z-index: 4
+	&>.sector
+		&:nth-of-type(2n + 1)
+			background: $dark
+			&:hover
+				background: $dark + #222222
+		&:nth-of-type(2n)
+			background: $light
+			&:hover
+				background: $light - #333333
+.mid25
+	position: relative
+	width: 100px
+	height: 100px
+	top: 50%
+	left: 50%
+	transform: translate(-50%, -50%)
+	z-index: 5
+	border-radius: 50%
+	background: $green
+	border: 2px solid $border
+	position: absolute
+	&:hover
+		background: $green + #114411
+.mid50
+	position: relative
+	width: 50px
+	height: 50px
+	top: 50%
+	left: 50%
+	transform: translate(-50%, -50%)
+	z-index: 6
+	border-radius: 50%
+	box-sizing: border-box
+	background: $red
+	border: 2px solid $border
+	position: absolute
+	&:hover
+		background: $red + #ff0000
+.sector 
+	width: 50%
+	height: 50%
+	position: absolute
+	transform-origin: left bottom
+	left: 50%
+	top: 0
+	box-sizing: border-box
+	border: 2px solid $border
+
