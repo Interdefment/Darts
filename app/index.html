@@ -45,6 +45,7 @@
 			>
 				<div class="pick-players-list nano">
 					<div class="nano-content">
+						<h6>Выберите игроков</h6>
 						<transition-group name="players">
 							<div
 								v-for="(player, index) in freePlayers"
@@ -75,7 +76,7 @@
 									v-for="(player, index) in pickedPlayers"
 									:key="player.id"
 									class="player player-choosen"
-									@click="players[player.id].picked = false; pickedPlayers.splice(index, 1); updateScroll()"
+									@click="players[player.id - 1].picked = false; pickedPlayers.splice(index, 1); updateScroll()"
 								>
 								<img :src="'img/avatars/' + player.avatar + '.png'" alt="" class="pick-avatar">
 								<p>{{ player.name }}</p></div>
