@@ -33,9 +33,55 @@
 		<transition name="fade">
 			<div
 				id="overlay"
-				@click="close"
 				v-show="!overlayClosed"
-			></div>
+			>
+			<div class="pick"
+				v-show="!overlayClosed"
+			>
+				<div class="pick-players-list nano">
+					<div class="nano-content">
+						<transition-group name="players">
+							<div
+								v-for="(player, index) in freePlayers"
+								:key="player.id"
+								class="player player-pick"
+								@click="player.picked = true; pickedPlayers.push(player); updateScroll()"
+							>
+							<img :src="'img/avatars/' + player.avatar + '.png'" alt="" class="pick-avatar">
+							<p>{{ player.name }}</p></div>
+						</transition-group>
+					</div>
+				</div>
+				<div class="start-play" @click="startPlay">Играть</div>
+				<div class="aside">
+					<div class="add-player">
+						<h6>Добавить игрока</h6>
+						<form name="adding" id="adding" @submit.prevent="addPlayer">
+							<input type="text" class="input-text" v-model="newName">
+							<input value="Добавить" class="input-add" type="submit">
+						</form>
+						<img src="img/avatars/noname.png" alt="" class="new-avatar" @click="openAvatarLib">
+					</div>
+					<div class="choosen nano">
+						<div class="nano-content">
+							<h6>Выбранные игроки</h6>
+							<transition-group name="players">
+								<div
+									v-for="(player, index) in pickedPlayers"
+									:key="player.id"
+									class="player player-choosen"
+									@click="players[player.id].picked = false; pickedPlayers.splice(index, 1); updateScroll()"
+								>
+								<img :src="'img/avatars/' + player.avatar + '.png'" alt="" class="pick-avatar">
+								<p>{{ player.name }}</p></div>
+							</transition-group>
+						</div>
+					</div>
+				</div>
+			</div>
+	
+		
+		</div>
 		</transition>
 		<transition name="fade">
 			<div
@@ -52,51 +98,6 @@
 			</div>
 		</transition>
 
-
-		<div class="pick"
-			v-show="!overlayClosed"
-		>
-			<div class="pick-players-list nano">
-				<div class="nano-content">
-					<transition-group name="players">
-						<div
-							v-for="(player, index) in freePlayers"
-							:key="player.id"
-							class="player player-pick"
-							@click="player.picked = true; updateScroll()"
-						>
-						<img :src="'img/avatars/' + player.avatar + '.png'" alt="" class="pick-avatar">
-						<p>{{ player.name }}</p></div>
-					</transition-group>
-				</div>
-			</div>
-			<div class="start-play" @click="startPlay">Играть</div>
-			<div class="aside">
-				<div class="add-player">
-					<h6>Добавить игрока</h6>
-					<form name="adding" id="adding" @submit.prevent="addPlayer">
-						<input type="text" class="input-text" v-model="newName">
-						<input value="Добавить" class="input-add" type="submit">
-					</form>
-					<img src="img/avatars/noname.png" alt="" class="new-avatar" @click="openAvatarLib">
-				</div>
-				<div class="choosen nano">
-					<div class="nano-content">
-						<h6>Выбранные игроки</h6>
-						<transition-group name="players">
-							<div
-								v-for="(player, index) in pickedPlayers"
-								:key="player.id"
-								class="player player-choosen"
-								@click="player.picked = false; updateScroll()"
-							>
-							<img :src="'img/avatars/' + player.avatar + '.png'" alt="" class="pick-avatar">
-							<p>{{ player.name }}</p></div>
-						</transition-group>
-					</div>
-				</div>
-			</div>
-		</div>
 
 		<div id="field" class="container text">
 			<div class="container x2">

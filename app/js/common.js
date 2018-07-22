@@ -29,6 +29,7 @@ var darts = new Vue({
 			{ id: 3, name: 'Женя', points: 0, totalPoints: 0, avatar: 15, picked: false },
 			{ id: 4, name: 'Паша', points: 0, totalPoints: 0, avatar: 28, picked: false }
 		],
+		pickedPlayers: [],
 		currentPlayer: 0,
 		clickCounter: 0,
 		overlayClosed: false,
@@ -37,11 +38,11 @@ var darts = new Vue({
 		avatarPicked: 0,
 	},
 	computed: {
-		pickedPlayers: function () {
-			return this.players.filter(function (player) {
-				return player.picked
-			})
-		},
+		// pickedPlayers: function () {
+		// 	return this.players.filter(function (player) {
+		// 		return player.picked
+		// 	})
+		// },
 		freePlayers: function () {
 			return this.players.filter(function (player) {
 				return !player.picked
@@ -55,7 +56,7 @@ var darts = new Vue({
 				}, 500);
 		},
 		shoot: function shoot (points) {
-			this.players[this.currentPlayer].points += points;
+			this.pickedPlayers[this.currentPlayer].points += points;
 			if (++this.clickCounter == 3) {
 				this.clickCounter = 0;
 				this.currentPlayer = 
@@ -84,6 +85,7 @@ var darts = new Vue({
 				picked: true
 			}
 			this.players.push(newPlayer);
+			this.pickedPlayers.push(newPlayer);
 			this.updateScroll();
 			this.newName = '';
 			$('.new-avatar').attr('src','img/avatars/noname.png');
