@@ -30,6 +30,11 @@
 <body>
 	<div id="bg"></div>
 	<div id="app">
+		<transition name="message">
+			<div class="message" v-if="notification">
+				{{ notification }}
+			</div>
+		</transition>
 		<transition name="fade">
 			<div
 				id="overlay"

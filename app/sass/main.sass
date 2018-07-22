@@ -26,7 +26,6 @@ body
 	margin: 0
 	padding: 0
 	box-sizing: border-box
-
 #bg
 	position: fixed
 	background: url(../img/bg.jpg) no-repeat center center
@@ -34,6 +33,25 @@ body
 	height: 100%
 	width: 100%
 	z-index: -10
+
+.message
+	position: fixed
+	width: 300px
+	height: 120px
+	background: #ccc
+	left: 50%
+	top: 20px
+	transform: translateX(-50%)
+	z-index: 1000
+	text-align: center
+	transition: all .3s linear
+	&-enter
+		opacity: 0
+		transform: translate(-50%, -200px)
+	&-leave-to
+		opacity: 0
+		transform: translate(-50%, -200px)
+
 #overlay
 	position: fixed
 	width: 100%

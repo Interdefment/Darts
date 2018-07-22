@@ -36,6 +36,7 @@ var darts = new Vue({
 		newName: '',
 		avatarChoosing: false,
 		avatarPicked: 0,
+		notification: '',
 	},
 	computed: {
 		// pickedPlayers: function () {
@@ -50,6 +51,13 @@ var darts = new Vue({
 		},
 	},
 	methods: {
+		showMessage: function message (text) {
+			this.notification = text;
+			setTimeout(() => {
+				this.notification = '';
+
+			}, 3000);
+		},
 		updateScroll: function updateScroll () {
 				setTimeout(function() {
 					$(".nano").nanoScroller();
@@ -74,8 +82,10 @@ var darts = new Vue({
 			this.overlayClosed = false;
 		},
 		addPlayer: function addPlayer (e) {
-			if (!avatarPicked || this.newName == '')
+			if (!this.avatarPicked || this.newName == '') {
+				this.showMessage('Введите имя и выберите аватар')
 				return false;
+			}
 			const newPlayer = { 
 				id: this.players.length + 1,
 				name: this.newName,
@@ -108,8 +118,10 @@ var darts = new Vue({
 			this.closeAvatarLib();
 		},
 		startPlay: function startPlay () {
-			if (this.pickedPlayers.length < 2)
+			if (this.pickedPlayers.length < 2) {
+				this.showMessage('Выбрано менее двух игроков')
 				return false;
+			};
 			this.close();
 		},
 	},
