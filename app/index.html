@@ -23,66 +23,135 @@
 	<!-- Custom Browsers Color End -->
 
 	<link rel="stylesheet" href="css/main.min.css">
+	<link rel="stylesheet" href="css/nanoscroller.css">
 	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 </head>
 
 <body>
+	<div id="bg"></div>
 	<div id="app">
-	<div id="field" class="container text">
-		<div class="container x2">
+		<transition name="fade">
 			<div
-				v-for="(sector, index) in sectors"
-				:key="sector.value"
-				:style="'transform: rotate(' + index * 18 + 'deg) skewY(' + 108 + 'deg)'"
-				:points="index * 2"
-				class="sector"
-				@click="shoot(sector.value * 2);"
+				id="overlay"
+				@click="close"
+				v-show="!overlayClosed"
 			></div>
-			<div class="container big">
-					<div
-						v-for="(sector, index) in sectors"
-						:key="sector.value"
-						:style="'transform: rotate(' + index * 18 + 'deg) skewY(' + 108 + 'deg)'"
-						:points="index"
-						class="sector"
-						@click="shoot(sector.value);"
-					></div>
-				<div class="container x3">
+		</transition>
+		<transition name="fade">
+			<div
+				id="overlay"
+				style="z-index: 950"
+				@click="closeAvatarLib"
+				v-show="avatarChoosing"
+			>
+				<div class="avatar-lib nano" @click.stop="">
+					<div class="nano-content">
+
+					</div>
+				</div>
+			</div>
+		</transition>
+
+
+		<div class="pick"
+			v-show="!overlayClosed"
+		>
+			<div class="pick-players-list nano">
+				<div class="nano-content">
+					<transition-group name="players">
+						<div
+							v-for="(player, index) in freePlayers"
+							:key="player.id"
+							class="player player-pick"
+							@click="player.picked = true; updateScroll()"
+						>
+						<img :src="'img/avatars/' + player.avatar + '.png'" alt="" class="pick-avatar">
+						<p>{{ player.name }}</p></div>
+					</transition-group>
+				</div>
+			</div>
+			<div class="start-play" @click="startPlay">Играть</div>
+			<div class="aside">
+				<div class="add-player">
+					<h6>Добавить игрока</h6>
+					<form name="adding" id="adding" @submit.prevent="addPlayer">
+						<input type="text" class="input-text" v-model="newName">
+						<input value="Добавить" class="input-add" type="submit">
+					</form>
+					<img src="img/avatars/noname.png" alt="" class="new-avatar" @click="openAvatarLib">
+				</div>
+				<div class="choosen nano">
+					<div class="nano-content">
+						<h6>Выбранные игроки</h6>
+						<transition-group name="players">
+							<div
+								v-for="(player, index) in pickedPlayers"
+								:key="player.id"
+								class="player player-choosen"
+								@click="player.picked = false; updateScroll()"
+							>
+							<img :src="'img/avatars/' + player.avatar + '.png'" alt="" class="pick-avatar">
+							<p>{{ player.name }}</p></div>
+						</transition-group>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div id="field" class="container text">
+			<div class="container x2">
+				<div
+					v-for="(sector, index) in sectors"
+					:key="sector.value"
+					:style="'transform: rotate(' + index * 18 + 'deg) skewY(' + 108 + 'deg)'"
+					:points="index * 2"
+					class="sector"
+					@click="shoot(sector.value * 2);"
+				></div>
+				<div class="container big">
 						<div
 							v-for="(sector, index) in sectors"
 							:key="sector.value"
 							:style="'transform: rotate(' + index * 18 + 'deg) skewY(' + 108 + 'deg)'"
-							:points="index * 3"
+							:points="index"
 							class="sector"
-							@click="shoot(sector.value * 3)"
+							@click="shoot(sector.value);"
 						></div>
-					<div class="container small">
+					<div class="container x3">
 							<div
 								v-for="(sector, index) in sectors"
 								:key="sector.value"
 								:style="'transform: rotate(' + index * 18 + 'deg) skewY(' + 108 + 'deg)'"
-								:points="index"
+								:points="index * 3"
 								class="sector"
-								@click="shoot(sector.value)"
+								@click="shoot(sector.value * 3)"
 							></div>
-						<div class="mid25"
-							@click="shoot(25);"
-						></div>
-						<div class="mid50"
-							@click="shoot(50);"
+						<div class="container small">
+								<div
+									v-for="(sector, index) in sectors"
+									:key="sector.value"
+									:style="'transform: rotate(' + index * 18 + 'deg) skewY(' + 108 + 'deg)'"
+									:points="index"
+									class="sector"
+									@click="shoot(sector.value)"
+								></div>
+							<div class="mid25"
+								@click="shoot(25);"
 							></div>
-					</div>
-				</div>		
+							<div class="mid50"
+								@click="shoot(50);"
+								></div>
+						</div>
+					</div>		
+				</div>
 			</div>
 		</div>
-	</div>
+		<div class="players">
+			<div
+				v-for="player in pickedPlayers"
+			>{{ player.name }} - {{ player.points }}</div>
+		</div>
 
-	<div class="players">
-		<div
-			v-for="player in players"
-			class="player"
-		>{{ player.name }} - {{ player.points }}</div>
-	</div>
 </div>
 	<script src="js/scripts.min.js"></script>
 

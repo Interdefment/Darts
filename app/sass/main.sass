@@ -9,12 +9,174 @@
 	background-color: $accent
 	color: #fff
 
+.nano 
+	background: #bba
+	width: 500px
+	height: 500px
+.nano > .nano-content
+	padding: 10px
+.nano > .nano-pane
+	background: #888
+.nano > .nano-pane > .nano-slider
+	background: #111
+body
+	font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif
+	user-select: none
+*
+	margin: 0
+	padding: 0
+	box-sizing: border-box
+
+#bg
+	position: fixed
+	background: url(../img/bg.jpg) no-repeat center center
+	background-size: cover
+	height: 100%
+	width: 100%
+	z-index: -10
+#overlay
+	position: fixed
+	width: 100%
+	height: 100%
+	background: rgba(0, 0, 0, .75)
+	z-index: 900
+	&.closed
+		display: none
+.fade
+	&-enter
+		opacity: 0
+		&-active
+			transition: all .5s linear
+	&-leave
+		&-to
+			opacity: 0
+		&-active
+			transition: all .5s linear
+.start-play
+	position: absolute
+	width: 300px
+	height: 50px
+	bottom: 30px
+	left: 200px
+	background: #090
+	color: #fff
+	font-size: 30px
+	line-height: 50px
+	text-align: center
+	cursor: pointer
+	
+.pick
+	position: fixed
+	width: 1000px
+	height: 600px
+	top: 50%
+	left: 50%
+	transform: translate(-50%, -50%)
+	background: #ffffff
+	z-index: 901
+	padding: 30px 20px
+	&-players-list
+		position: relative
+		margin: 0
+		width: 700px
+		height: 480px
+		padding: 30px 20px
+		background: #ffff99
+		overflow: auto
+		float: left
+		.nano-content
+			padding: 30px
+			padding-left: 10px
+	&-avatar
+		width: 60px
+		height: 60px
+.aside
+	background: #ff90ff
+	width: 240px
+	float: left
+	margin-left: 20px
+	.choosen
+		width: 100%
+		height: 350px
+		background: #559
+		padding: 10px 30px
+	.add-player
+		width: 100%
+		height: 180px
+		padding: 10px
+	h6
+		font-size: 20px
+		text-align: center
+		padding-bottom: 30px
+		line-height: 1
+.input
+	&-text
+		width: 220px
+		height: 40px
+		font-size: 20px
+		padding: 10px
+	&-add
+		width: 150px
+		height: 50px
+		margin: 20px 0px
+		float: left
+.new-avatar
+	display: block
+	width: 50px
+	height: 50px
+	float: right
+	margin-top: 20px
+	cursor: pointer
+.avatar-lib
+	width: 600px
+	height: 600px
+	background: #ccc
+	top: 50%
+	left: 50%
+	transform: translate(-50%, -50%)
+	padding: 30px 20px
+	padding-left: 0
+	z-index: 951
+	.avatar
+		width: 60px
+		height: 60px
+		margin-left: 20px
+		cursor: pointer
+
+.player
+	position: relative
+	width: 200px
+	height: 70px
+	padding: 4px
+	border: 1px solid #000
+	margin-bottom: 20px
+	cursor: pointer
+	transition: all .5s linear
+	img
+		float: left
+	p
+		line-height: 60px
+		font-size: 18px
+		padding-left: 10px
+		float: left
+	&-pick
+		display: inline-block
+		margin-left: 20px
+	&-choosen
+		width: 220px
+		display: block
+
+
+.players-enter, .players-leave-to
+  opacity: 0
+.players-leave-active
+  position: absolute
+
 #field
 	width: 600px
 	height: 600px
 	border-radius: 50%
 	background: $dark url(../img/numbers.png) no-repeat center center
-	box-sizing: border-box
 	margin-top: 0
 	position: relative
 	overflow: hidden
@@ -41,7 +203,6 @@
 	position: relative
 	margin-top: 50%
 	margin-left: 50%
-	box-sizing: border-box
 	transform: translate(-50%, -50%)
 	border: 2px solid $border
 .x2
@@ -118,7 +279,6 @@
 	transform: translate(-50%, -50%)
 	z-index: 6
 	border-radius: 50%
-	box-sizing: border-box
 	background: $red
 	border: 2px solid $border
 	position: absolute
@@ -131,6 +291,5 @@
 	transform-origin: left bottom
 	left: 50%
 	top: 0
-	box-sizing: border-box
 	border: 2px solid $border
 
