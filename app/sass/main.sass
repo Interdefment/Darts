@@ -22,6 +22,7 @@
 body
 	font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif
 	user-select: none
+	// overflow: hidden
 *
 	margin: 0
 	padding: 0
@@ -64,12 +65,12 @@ body
 	&-enter
 		opacity: 0
 		&-active
-			transition: all .5s linear
+			transition: all .3s linear
 	&-leave
 		&-to
 			opacity: 0
 		&-active
-			transition: all .5s linear
+			transition: all .3s linear
 .start-play
 	position: absolute
 	width: 300px
@@ -90,7 +91,7 @@ body
 	top: 50%
 	left: 50%
 	transform: translate(-50%, -50%)
-	background: #ffffff
+	background: white
 	z-index: 901
 	padding: 30px 20px
 	&-players-list
@@ -171,18 +172,146 @@ body
 	margin-bottom: 20px
 	cursor: pointer
 	transition: all .5s linear
+	display: flex
 	img
 		float: left
-	p
+	&-name
+		display: table-cell
+		height: 60px
+		vertical-align: middle
 		font-size: 18px
 		padding-left: 10px
-		float: left
 	&-pick
 		display: inline-block
 		margin-left: 20px
 	&-choosen
 		width: 220px
 		display: block
+	&-active
+		width: 330px
+		cursor: default
+		border-color: white
+		&-wrapper
+			width: 200px
+			height: 60px
+			position: absolute
+		&-list
+			position: fixed
+			height: 100%
+			width: 370px
+			background: $aside-bg
+			padding: 20px
+			z-index: 10
+	&-record
+		width: 330px
+		cursor: default
+		border-color: white
+		&-list
+			position: fixed
+			height: 100%
+			width: 370px
+			padding: 20px
+			padding-left: 0
+			z-index: 10
+	&-stats
+		position: absolute
+		width: 30px
+		height: 30px
+		bottom: 5px
+		right: 80px
+		cursor: pointer
+	p.player-points
+		position: absolute
+		right: 40px
+		top: 6px
+		line-height: 1
+		font-size: 20px
+	&.active
+		box-shadow: 0 0 10px 5px #0a0
+		border-color: #090
+		background: #00990044
+	&.gold
+		box-shadow: 0 0 10px 5px $gold
+		border-color: $gold
+	&.silver
+		box-shadow: 0 0 10px 5px $silver
+		border-color: $silver
+	&.bronze
+		box-shadow: 0 0 10px 5px $bronze
+		border-color: $bronze
+
+.game
+	position: fixed
+	height: 100%
+	width: 370px
+	right: 0
+	background: $aside-bg
+	padding: 20px
+	z-index: 10
+	&-labels
+		p
+			font-size: 30px
+			color: white
+			padding-bottom: 20px
+		h6
+			font-size: 25px
+			color: white
+			text-align: center
+.turn
+	&-end
+		position: fixed
+		width: 400px
+		height: 180px
+		background: #ccc
+		top: 50%
+		left: 50%
+		transform: translate(-50%, -50%)
+		padding: 30px 10px
+		z-index: 961
+		text-align: center
+		p
+			font-size: 24px
+			display: inline-block
+			height: 80px
+	&-btn
+		display: inline-block
+		height: 40px
+		width: 160px
+		background: #009900
+		margin: 0 10px
+		line-height: 40px
+		font-size: 20px
+		color: white
+		border-radius: 3px
+		cursor: pointer
+	&-correct
+		background: #900
+
+	
+#gameover
+	position: fixed
+	width: calc(100% - 740px)
+	height: 100%
+	top: 50%
+	left: 50%
+	transform: translate(-50%, -50%)
+	background: $aside-bg
+.gameover
+	position: fixed
+	width: 400px
+	height: 180px
+	background: #ccc
+	top: 50%
+	left: 50%
+	transform: translate(-50%, -50%)
+	padding: 30px 10px
+	z-index: 961
+	text-align: center
+	p
+		font-size: 24px
+		display: inline-block
+		height: 80px
+
 
 
 .players-enter, .players-leave-to
@@ -195,10 +324,10 @@ body
 	height: 600px
 	border-radius: 50%
 	background: $dark url(../img/numbers.png) no-repeat center center
-	margin-top: 0
+	margin-left: 50%
 	position: relative
 	overflow: hidden
-	transform: rotateZ(-9deg)
+	transform: rotateZ(-9deg) translate(-50%, -40px)
 	&::before
 		display: block
 		position: absolute

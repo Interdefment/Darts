@@ -38,10 +38,9 @@
 		<transition name="fade">
 			<div
 				id="overlay"
-				v-show="!overlayClosed"
+				v-if="!overlayClosed"
 			>
 			<div class="pick"
-				v-show="!overlayClosed"
 			>
 				<div class="pick-players-list nano">
 					<div class="nano-content">
@@ -54,7 +53,7 @@
 								@click="player.picked = true; pickedPlayers.push(player); updateScroll()"
 							>
 							<img :src="'img/avatars/' + player.avatar + '.png'" alt="" class="pick-avatar">
-							<p>{{ player.name }}</p></div>
+							<div class="player-name">{{ player.name }}</div></div>
 						</transition-group>
 					</div>
 				</div>
@@ -78,8 +77,9 @@
 									class="player player-choosen"
 									@click="players[player.id - 1].picked = false; pickedPlayers.splice(index, 1); updateScroll()"
 								>
-								<img :src="'img/avatars/' + player.avatar + '.png'" alt="" class="pick-avatar">
-								<p>{{ player.name }}</p></div>
+									<img :src="'img/avatars/' + player.avatar + '.png'" alt="" class="pick-avatar">
+									<div class="player-name">{{ player.name }}</div>
+								</div>
 							</transition-group>
 						</div>
 					</div>
@@ -98,14 +98,84 @@
 			>
 				<div class="avatar-lib nano" @click.stop="">
 					<div class="nano-content">
-
 					</div>
 				</div>
 			</div>
 		</transition>
 
+		<transition name="fade">
+			<div
+				id="overlay"
+				style="z-index: 960"
+				v-if="turnEnded"
+			>
+				<div class="turn-end">
+					<p class="turn-info">
+						{{ pickedPlayers[currentPlayer].name }} бросил на {{ currentPoints }} очков
+					</p>
+					<div class="turn-correct turn-btn" @click="correct">Корректировать</div>
+					<div class="turn-next turn-btn" v-if="currentPlayer == pickedPlayers.length && currentSector == 50" @click="nextTurn">Завершить</div>
+					<div class="turn-next turn-btn" v-else @click="nextTurn">Следующий!</div>
+				</div>
+			</div>
+		</transition>
+		<transition name="fade">
+			<div
+				id="gameover"
+				style="z-index: 960"
+				v-if="gameover"
+			>
+				<div class="gameover">
+					<p class="turn-info">
+						{{ playersRating[0].name }} победил со счетом {{ playersRating[0].points }} очков!!!
+					</p>
+					<div class="turn-next turn-btn" @click="reload">Новая игра!</div>
+				</div>
+			</div>
+		</transition>
 
-		<div id="field" class="container text">
+		<div class="player-active-list">
+			<template v-if="!gameover">
+				<div
+					v-for="(player, index) in pickedPlayers"
+					:key="player.id"
+					:class="['player', 'player-active', {'active': index == currentPlayer}]"
+				>
+					<div class="player-active-wrapper">
+						<img :src="'img/avatars/' + player.avatar + '.png'" alt="" class="pick-avatar">
+						<div class="player-name">{{ player.name }}</div>
+					</div>
+					<img src="img/stats.png" alt="Статистикаы" class="player-stats">
+					<p class="player-points">Очки: {{ player.points }}</p>
+				</div>
+			</template>
+		</div>
+		<div class="game">
+			<div class="game-labels">
+				<p>Текущий сектор: {{ currentSector }}</p>
+				<h6>Рейтинг игроков:</h6>
+			</div>
+			<div class="player-record-list">
+				<transition-group name="players">
+					<div
+						v-for="(player, index) in playersRating"
+						:key="player.id"
+						:class="['player', 'player-active', {'gold': (index == 0 && player.points > 0), 'silver': (index == 1 && player.points > 0), 'bronze': (index == 2 && player.points > 0)}]"
+					>
+						<div class="player-active-wrapper">
+							<img :src="'img/avatars/' + player.avatar + '.png'" alt="" class="pick-avatar">
+							<div class="player-name">{{ player.name }}</div>
+						</div>
+						<img src="img/stats.png" alt="Статистикаы" class="player-stats">
+						<p class="player-points">Очки: {{ player.points }}</p>
+					</div>
+				</transition-group>
+			</div>
+
+		</div>
+
+
+		<div id="field" class="text">
 			<div class="container x2">
 				<div
 					v-for="(sector, index) in sectors"
@@ -113,7 +183,7 @@
 					:style="'transform: rotate(' + index * 18 + 'deg) skewY(' + 108 + 'deg)'"
 					:points="index * 2"
 					class="sector"
-					@click="shoot(sector.value * 2);"
+					@click="shoot(sector.value * 2, sector.value == currentSector);"
 				></div>
 				<div class="container big">
 						<div
@@ -122,7 +192,7 @@
 							:style="'transform: rotate(' + index * 18 + 'deg) skewY(' + 108 + 'deg)'"
 							:points="index"
 							class="sector"
-							@click="shoot(sector.value);"
+							@click="shoot(sector.value, sector.value == currentSector);"
 						></div>
 					<div class="container x3">
 							<div
@@ -131,7 +201,7 @@
 								:style="'transform: rotate(' + index * 18 + 'deg) skewY(' + 108 + 'deg)'"
 								:points="index * 3"
 								class="sector"
-								@click="shoot(sector.value * 3)"
+								@click="shoot(sector.value * 3, sector.value == currentSector)"
 							></div>
 						<div class="container small">
 								<div
@@ -140,23 +210,18 @@
 									:style="'transform: rotate(' + index * 18 + 'deg) skewY(' + 108 + 'deg)'"
 									:points="index"
 									class="sector"
-									@click="shoot(sector.value)"
+									@click="shoot(sector.value, sector.value == currentSector)"
 								></div>
 							<div class="mid25"
-								@click="shoot(25);"
+								@click="shoot(25, 50 == currentSector);"
 							></div>
 							<div class="mid50"
-								@click="shoot(50);"
+								@click="shoot(50, 50 == currentSector);"
 								></div>
 						</div>
 					</div>		
 				</div>
 			</div>
-		</div>
-		<div class="players">
-			<div
-				v-for="player in pickedPlayers"
-			>{{ player.name }} - {{ player.points }}</div>
 		</div>
 
 </div>
