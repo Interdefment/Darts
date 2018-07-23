@@ -11,13 +11,13 @@
 
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-	
+
 	<!-- Template Basic Images Start -->
 	<meta property="og:image" content="path/to/image.jpg">
 	<link rel="icon" href="img/favicon/favicon.ico">
 	<link rel="apple-touch-icon" sizes="180x180" href="img/favicon/apple-touch-icon-180x180.png">
 	<!-- Template Basic Images End -->
-	
+
 	<!-- Custom Browsers Color Start -->
 	<meta name="theme-color" content="#000">
 	<!-- Custom Browsers Color End -->
@@ -85,8 +85,8 @@
 					</div>
 				</div>
 			</div>
-	
-		
+
+
 		</div>
 		</transition>
 		<transition name="fade">
@@ -105,7 +105,7 @@
 
 		<transition name="fade">
 			<div
-				id="overlay"
+				id="midlay"
 				style="z-index: 960"
 				v-if="turnEnded"
 			>
@@ -121,7 +121,7 @@
 		</transition>
 		<transition name="fade">
 			<div
-				id="gameover"
+				id="midlay"
 				style="z-index: 960"
 				v-if="gameover"
 			>
@@ -147,6 +147,11 @@
 					</div>
 					<img src="img/stats.png" alt="Статистикаы" class="player-stats">
 					<p class="player-points">Очки: {{ player.points }}</p>
+				</div>
+				<div class="set-points">
+					<div class="first">{{ first }}</div>
+					<div class="second">{{ second }}</div>
+					<div class="third">{{ third }}</div>
 				</div>
 			</template>
 		</div>
@@ -175,51 +180,51 @@
 		</div>
 
 
-		<div id="field" class="text">
+		<div id="field" @click.stop="shoot(0, false, 0)" class="text">
 			<div class="container x2">
 				<div
 					v-for="(sector, index) in sectors"
-					:key="sector.value"
+					:key="sector"
 					:style="'transform: rotate(' + index * 18 + 'deg) skewY(' + 108 + 'deg)'"
 					:points="index * 2"
 					class="sector"
-					@click="shoot(sector.value * 2, sector.value == currentSector);"
+					@click.stop="shoot(sector, sector == currentSector, 2);"
 				></div>
 				<div class="container big">
 						<div
 							v-for="(sector, index) in sectors"
-							:key="sector.value"
+							:key="sector"
 							:style="'transform: rotate(' + index * 18 + 'deg) skewY(' + 108 + 'deg)'"
 							:points="index"
 							class="sector"
-							@click="shoot(sector.value, sector.value == currentSector);"
+							@click.stop="shoot(sector, sector == currentSector, 1);"
 						></div>
 					<div class="container x3">
 							<div
 								v-for="(sector, index) in sectors"
-								:key="sector.value"
+								:key="sector"
 								:style="'transform: rotate(' + index * 18 + 'deg) skewY(' + 108 + 'deg)'"
 								:points="index * 3"
 								class="sector"
-								@click="shoot(sector.value * 3, sector.value == currentSector)"
+								@click.stop="shoot(sector, sector == currentSector, 3)"
 							></div>
 						<div class="container small">
 								<div
 									v-for="(sector, index) in sectors"
-									:key="sector.value"
+									:key="sector"
 									:style="'transform: rotate(' + index * 18 + 'deg) skewY(' + 108 + 'deg)'"
 									:points="index"
 									class="sector"
-									@click="shoot(sector.value, sector.value == currentSector)"
+									@click.stop="shoot(sector, sector == currentSector, 1)"
 								></div>
 							<div class="mid25"
-								@click="shoot(25, 50 == currentSector);"
+								@click.stop="shoot(25, 50 == currentSector, 1);"
 							></div>
 							<div class="mid50"
-								@click="shoot(50, 50 == currentSector);"
+								@click="shoot(25, 50 == currentSector, 2);"
 								></div>
 						</div>
-					</div>		
+					</div>
 				</div>
 			</div>
 		</div>

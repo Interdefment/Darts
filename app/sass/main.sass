@@ -9,16 +9,12 @@
 	background-color: $accent
 	color: #fff
 
-.nano 
-	background: #bba
-	width: 500px
-	height: 500px
 .nano > .nano-content
 	padding: 10px
 .nano > .nano-pane
 	background: #888
 .nano > .nano-pane > .nano-slider
-	background: #111
+	background: #ccc
 body
 	font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif
 	user-select: none
@@ -77,21 +73,27 @@ body
 	height: 50px
 	bottom: 30px
 	left: 200px
-	background: #090
+	background: url(../img/bg-btn.jpg) center center no-repeat
+	background-size: cover
 	color: #fff
 	font-size: 30px
 	line-height: 50px
 	text-align: center
 	cursor: pointer
-	
+	overflow: hidden
+	box-shadow: 5px 5px 10px #121, -2px -2px 4px #121
+
 .pick
 	position: fixed
-	width: 1000px
-	height: 600px
+	width: 1006px
+	height: 606px
 	top: 50%
 	left: 50%
 	transform: translate(-50%, -50%)
-	background: white
+	background: url(../img/bg-pick.jpg) center center no-repeat
+	box-shadow: 5px 5px 14px #000
+	border: 3px solid #000000
+	background-size: cover
 	z-index: 901
 	padding: 30px 20px
 	&-players-list
@@ -100,7 +102,6 @@ body
 		width: 700px
 		height: 480px
 		padding: 0px 20px 30px
-		background: #ffff99
 		overflow: auto
 		float: left
 		.nano-content
@@ -112,18 +113,17 @@ body
 		height: 60px
 	h6
 		font-size: 20px
+		color: #ffffff
 		text-align: center
 		padding-bottom: 30px
 		line-height: 1
 .aside
-	background: #ff90ff
 	width: 240px
 	float: left
 	margin-left: 20px
 	.choosen
 		width: 100%
 		height: 350px
-		background: #559
 		padding: 10px 30px
 	.add-player
 		width: 100%
@@ -168,7 +168,8 @@ body
 	width: 200px
 	height: 70px
 	padding: 4px
-	border: 1px solid #000
+	border: 1px solid #ccc
+	background: rgba(255, 255, 255, .3)
 	margin-bottom: 20px
 	cursor: pointer
 	transition: all .5s linear
@@ -202,6 +203,7 @@ body
 			background: $aside-bg
 			padding: 20px
 			z-index: 10
+			// box-shadow: 5px 0 8px $aside-bg
 	&-record
 		width: 330px
 		cursor: default
@@ -227,18 +229,21 @@ body
 		line-height: 1
 		font-size: 20px
 	&.active
-		box-shadow: 0 0 10px 5px #0a0
+		box-shadow: 3px 3px 5px #0a0
 		border-color: #090
 		background: #00990044
 	&.gold
-		box-shadow: 0 0 10px 5px $gold
+		box-shadow: 3px 3px 5px  $gold
 		border-color: $gold
+		background: #ffd70077
 	&.silver
-		box-shadow: 0 0 10px 5px $silver
+		box-shadow: 3px 3px 5px  $silver
 		border-color: $silver
+		background: #c0c0c077
 	&.bronze
-		box-shadow: 0 0 10px 5px $bronze
+		box-shadow: 3px 3px 5px  $bronze
 		border-color: $bronze
+		background: #cd7f3277
 
 .game
 	position: fixed
@@ -248,6 +253,7 @@ body
 	background: $aside-bg
 	padding: 20px
 	z-index: 10
+	// box-shadow: -5px 0 8px $aside-bg
 	&-labels
 		p
 			font-size: 30px
@@ -287,14 +293,14 @@ body
 	&-correct
 		background: #900
 
-	
-#gameover
+
+#midlay
 	position: fixed
 	width: calc(100% - 740px)
 	height: 100%
-	top: 50%
+	top: 0
 	left: 50%
-	transform: translate(-50%, -50%)
+	transform: translate(-50%, 0)
 	background: $aside-bg
 .gameover
 	position: fixed
@@ -318,6 +324,22 @@ body
   opacity: 0
 .players-leave-active
   position: absolute
+.set-points
+	position: absolute
+	width: 100%
+	height: 50px
+	bottom: 0
+	div
+		height: 100%
+		width: 70px
+		position: relative
+		margin: 0 20px
+		text-align: center
+		float: left
+		line-height: 50px
+		font-size: 30px
+		color: white
+
 
 #field
 	width: 600px
@@ -328,6 +350,7 @@ body
 	position: relative
 	overflow: hidden
 	transform: rotateZ(-9deg) translate(-50%, -40px)
+	box-shadow: 5px 5px 10px #000000
 	&::before
 		display: block
 		position: absolute
@@ -342,7 +365,7 @@ body
 			border: none
 			vertical-align: top
 			color: #fff
-.container 
+.container
 	width: 550px
 	height: 550px
 	overflow: hidden !important
@@ -431,7 +454,7 @@ body
 	position: absolute
 	&:hover
 		background: $red + #ff0000
-.sector 
+.sector
 	width: 50%
 	height: 50%
 	position: absolute
