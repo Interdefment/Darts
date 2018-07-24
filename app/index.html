@@ -21,9 +21,9 @@
 	<!-- Custom Browsers Color Start -->
 	<meta name="theme-color" content="#000">
 	<!-- Custom Browsers Color End -->
+	<link rel="stylesheet" href="css/nanoscroller.css">
 
 	<link rel="stylesheet" href="css/main.min.css">
-	<link rel="stylesheet" href="css/nanoscroller.css">
 	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 </head>
 
@@ -50,7 +50,7 @@
 								v-for="(player, index) in freePlayers"
 								:key="player.id"
 								class="player player-pick"
-								@click="player.picked = true; pickedPlayers.push(player); updateScroll()"
+								@click="pickPlayer(player, index)"
 							>
 							<img :src="'img/avatars/' + player.avatar + '.png'" alt="" class="pick-avatar">
 							<div class="player-name">{{ player.name }}</div></div>
@@ -75,7 +75,7 @@
 									v-for="(player, index) in pickedPlayers"
 									:key="player.id"
 									class="player player-choosen"
-									@click="players[player.id - 1].picked = false; pickedPlayers.splice(index, 1); updateScroll()"
+									@click="removePlayer(player, index)"
 								>
 									<img :src="'img/avatars/' + player.avatar + '.png'" alt="" class="pick-avatar">
 									<div class="player-name">{{ player.name }}</div>
@@ -134,19 +134,21 @@
 			</div>
 		</transition>
 
-		<div class="player-active-list">
+		<div class="player-active-list nano">
 			<template v-if="!gameover">
-				<div
-					v-for="(player, index) in pickedPlayers"
-					:key="player.id"
-					:class="['player', 'player-active', {'active': index == currentPlayer}]"
-				>
-					<div class="player-active-wrapper">
-						<img :src="'img/avatars/' + player.avatar + '.png'" alt="" class="pick-avatar">
-						<div class="player-name">{{ player.name }}</div>
+				<div class="nano-content">
+					<div
+						v-for="(player, index) in pickedPlayers"
+						:key="player.id"
+						:class="['player', 'player-active', {'active': index == currentPlayer}]"
+					>
+						<div class="player-active-wrapper">
+							<img :src="'img/avatars/' + player.avatar + '.png'" alt="" class="pick-avatar">
+							<div class="player-name">{{ player.name }}</div>
+						</div>
+						<img src="img/stats.png" alt="Статистикаы" class="player-stats">
+						<p class="player-points">Очки: {{ player.points }}</p>
 					</div>
-					<img src="img/stats.png" alt="Статистикаы" class="player-stats">
-					<p class="player-points">Очки: {{ player.points }}</p>
 				</div>
 				<div class="set-points">
 					<div class="first">{{ first }}</div>
@@ -160,21 +162,23 @@
 				<p>Текущий сектор: {{ currentSector }}</p>
 				<h6>Рейтинг игроков:</h6>
 			</div>
-			<div class="player-record-list">
-				<transition-group name="players">
-					<div
-						v-for="(player, index) in playersRating"
-						:key="player.id"
-						:class="['player', 'player-active', {'gold': (index == 0 && player.points > 0), 'silver': (index == 1 && player.points > 0), 'bronze': (index == 2 && player.points > 0)}]"
-					>
-						<div class="player-active-wrapper">
-							<img :src="'img/avatars/' + player.avatar + '.png'" alt="" class="pick-avatar">
-							<div class="player-name">{{ player.name }}</div>
+			<div class="player-record-list nano">
+				<div class="nano-content">
+					<transition-group name="players">
+						<div
+							v-for="(player, index) in playersRating"
+							:key="player.id"
+							:class="['player', 'player-active', {'gold': (index == 0 && player.points > 0), 'silver': (index == 1 && player.points > 0), 'bronze': (index == 2 && player.points > 0)}]"
+						>
+							<div class="player-active-wrapper">
+								<img :src="'img/avatars/' + player.avatar + '.png'" alt="" class="pick-avatar">
+								<div class="player-name">{{ player.name }}</div>
+							</div>
+							<img src="img/stats.png" alt="Статистикаы" class="player-stats">
+							<p class="player-points">Очки: {{ player.points }}</p>
 						</div>
-						<img src="img/stats.png" alt="Статистикаы" class="player-stats">
-						<p class="player-points">Очки: {{ player.points }}</p>
-					</div>
-				</transition-group>
+					</transition-group>
+				</div>
 			</div>
 
 		</div>

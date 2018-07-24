@@ -55,7 +55,7 @@ var darts = new Vue({
 			return clone.sort(function(d1, d2){
 				return d1.points < d2.points
 			});
-	 }
+		}
 	},
 	methods: {
 		showMessage: function message (text) {
@@ -72,6 +72,20 @@ var darts = new Vue({
 				setTimeout(function() {
 					$(".nano").nanoScroller();
 				}, 500);
+		},
+		pickPlayer: function pickPlayer (player, index) {
+			if (player.picked)
+				return false;
+			player.picked = true;
+			this.pickedPlayers.push(player);
+			this.updateScroll();
+		},
+		removePlayer: function pickPlayer (player, index) {
+			if (player.picked)
+				return false;
+			this.players[player.id - 1].picked = false;
+			this.pickedPlayers.splice(index, 1);
+			this.updateScroll();
 		},
 		close: function close () {
 			this.overlayClosed = true;
@@ -104,7 +118,7 @@ var darts = new Vue({
 		checkAvatar: function checkAvatar (number) {
 			for (let i = 0; i < this.players.length; i++) {
 				if (this.players[i].avatar == number) {
-				 return true;
+					return true;
 				}
 			}
 			return false;
@@ -124,10 +138,6 @@ var darts = new Vue({
 			if (this.pickedPlayers.length < 2) {
 				this.showMessage('Выбрано менее двух игроков')
 				return false;
-			} else
-			if (this.pickedPlayers.length > 6) {
-				this.showMessage('Выбрано слишком много игроков')
-				return false;
 			};
 			this.close();
 		},
@@ -138,7 +148,6 @@ var darts = new Vue({
 			this.pickedPlayers[this.currentPlayer].points -= this.currentPoints;
 			this.currentPoints = 0;
 			this.turnEnded = false;
-
 		},
 		winFunction: function win () {
 			this.gameover = true;
@@ -211,6 +220,6 @@ $('.avatar-lib .avatar').on('click', function(e) {
 $(document).ready(function() {
 	$(".nano").nanoScroller({falsh:true });
 	// $($('.player-pick')[0]).click();
-	// $($('.player-pick')).click();
-	// $('.start-play').click();
+	$($('.player-pick')).click();
+	$('.start-play').click();
 });
