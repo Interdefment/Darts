@@ -10,7 +10,7 @@
   top           : 0;
   right         : 0;
   bottom        : 0;
-  left          : 0;
+	left          : 0;
 }
 .nano > .nano-content:focus {
   outline: thin dotted;
@@ -22,7 +22,6 @@
   display: block;
 }
 .nano > .nano-pane {
-  background : rgba(0,0,0,.25);
   position   : absolute;
   width      : 10px;
   right      : 0;
@@ -39,8 +38,6 @@
   border-radius         : 5px;
 }
 .nano > .nano-pane > .nano-slider {
-  background: #444;
-  background: rgba(0,0,0,.5);
   position              : relative;
   margin                : 0 1px;
   -moz-border-radius    : 3px;

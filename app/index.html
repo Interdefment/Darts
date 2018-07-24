@@ -62,7 +62,7 @@
 					<div class="add-player">
 						<h6>Добавить игрока</h6>
 						<form name="adding" id="adding" @submit.prevent="addPlayer">
-							<input type="text" class="input-text" v-model="newName">
+							<input type="text" class="input-text" v-model="newName" placeholder="Введите имя">
 							<input value="Добавить" class="input-add" type="submit">
 						</form>
 						<img src="img/avatars/noname.png" alt="" class="new-avatar" @click="openAvatarLib">

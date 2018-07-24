@@ -17,6 +17,7 @@ var darts = new Vue({
 		avatarChoosing: false,
 		avatarPicked: 0,
 		notification: '',
+		messageDisabled: false,
 		currentSector: 1,
 		turnEnded: false,
 		currentPoints: 0,
@@ -58,11 +59,14 @@ var darts = new Vue({
 	},
 	methods: {
 		showMessage: function message (text) {
+			if (this.messageDisabled)
+				return false;
+			this.messageDisabled = true;
 			this.notification = text;
 			setTimeout(() => {
 				this.notification = '';
-
-			}, 3000);
+				this.messageDisabled = false;
+			}, 2500);
 		},
 		updateScroll: function updateScroll () {
 				setTimeout(function() {
@@ -106,6 +110,7 @@ var darts = new Vue({
 			return false;
 		},
 		openAvatarLib: function chooseAva () {
+			this.notification = '';
 			this.avatarChoosing = true;
 			this.updateScroll();
 		},
@@ -115,6 +120,7 @@ var darts = new Vue({
 			this.closeAvatarLib();
 		},
 		startPlay: function startPlay () {
+			this.notification = '';
 			if (this.pickedPlayers.length < 2) {
 				this.showMessage('Выбрано менее двух игроков')
 				return false;
@@ -205,6 +211,6 @@ $('.avatar-lib .avatar').on('click', function(e) {
 $(document).ready(function() {
 	$(".nano").nanoScroller({falsh:true });
 	// $($('.player-pick')[0]).click();
-	// $($('.player-pick')[1]).click();
+	// $($('.player-pick')).click();
 	// $('.start-play').click();
 });

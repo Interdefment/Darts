@@ -12,13 +12,13 @@
 .nano > .nano-content
 	padding: 10px
 .nano > .nano-pane
-	background: #888
+	background: #000000
 .nano > .nano-pane > .nano-slider
-	background: #ccc
+	background: #333
 body
-	font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif
+	font-family: $font
 	user-select: none
-	// overflow: hidden
+	overflow: hidden
 *
 	margin: 0
 	padding: 0
@@ -33,21 +33,28 @@ body
 
 .message
 	position: fixed
+	display: table-cell
+	vertical-align: middle
 	width: 300px
-	height: 120px
-	background: #ccc
+	height: 300px
+	padding: 160px 30px 20px
+	background: url(../img/msg.png) no-repeat center center
+	background-size: cover
+	color: #ffffff
+	text-shadow: 1px 1px 2px #000000
 	left: 50%
-	top: 20px
+	top: -18px
 	transform: translateX(-50%)
 	z-index: 1000
 	text-align: center
-	transition: all .3s linear
+	font-size: 23px
+	transform-origin: 50% 0%
+	transition: all 1s cubic-bezier(.5,2.07,.27,.64)
 	&-enter
-		opacity: 0
-		transform: translate(-50%, -200px)
+		transform: rotateZ(-120deg)
 	&-leave-to
-		opacity: 0
-		transform: translate(-50%, -200px)
+		transition: all .3s ease-in
+		transform: translate(-50%, -300px)
 
 #overlay
 	position: fixed
@@ -81,7 +88,11 @@ body
 	text-align: center
 	cursor: pointer
 	overflow: hidden
-	box-shadow: 5px 5px 10px #121, -2px -2px 4px #121
+	box-shadow: 5px 5px 3px #121, -2px -2px 3px #121
+	text-transform: uppercase
+	transition: all .1s linear
+	&:active
+		box-shadow: 2px 2px 5px #121, -1px -1px 2px #121
 
 .pick
 	position: fixed
@@ -96,6 +107,7 @@ body
 	background-size: cover
 	z-index: 901
 	padding: 30px 20px
+	// font-family: 	Beresta, 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif
 	&-players-list
 		position: relative
 		margin: 0
@@ -117,6 +129,8 @@ body
 		text-align: center
 		padding-bottom: 30px
 		line-height: 1
+		text-transform: uppercase
+		letter-spacing: 1px
 .aside
 	width: 240px
 	float: left
@@ -125,6 +139,7 @@ body
 		width: 100%
 		height: 350px
 		padding: 10px 30px
+		background: rgba(0, 0, 0, .3)
 	.add-player
 		width: 100%
 		height: 180px
@@ -135,11 +150,31 @@ body
 		height: 40px
 		font-size: 20px
 		padding: 10px
+		background: rgba(255, 255, 255, .1)
+		border: 1px solid white
+		color: white
+		// font-family: Beresta
+		letter-spacing: 1px
 	&-add
 		width: 150px
 		height: 50px
 		margin: 20px 0px
 		float: left
+		background: url(../img/add-btn.jpg) center top no-repeat
+		// background: linear-gradient(45deg	, #050505, $grey);
+		// background-size: cover
+		border: 1px solid #222
+		color: white
+		// font-family: Beresta
+		font-size: 25px
+		box-shadow: 3px 3px 4px #000
+		transition: all .1s linear
+		cursor: pointer
+		&:hover
+			box-shadow: 2px 2px 4px #000, 0 0 6px 1px #222
+		&:active
+			box-shadow: 1px 1px 3px #111
+
 .new-avatar
 	display: block
 	width: 50px
@@ -147,10 +182,16 @@ body
 	float: right
 	margin-top: 20px
 	cursor: pointer
+	box-shadow: 3px 3px 5px #222
+	border-radius: 50%
+
 .avatar-lib
 	width: 600px
 	height: 600px
-	background: #ccc
+	background: linear-gradient(-135deg, #470000, #190a05)
+	background: url(../img/library.png) center center no-repeat
+	box-shadow: 3px 3px 15px #1f0900
+	background-size: cover
 	top: 50%
 	left: 50%
 	transform: translate(-50%, -50%)
@@ -161,7 +202,10 @@ body
 		width: 60px
 		height: 60px
 		margin-left: 20px
+		margin-top: 10px
 		cursor: pointer
+		border: 1px solid $grey
+		box-shadow: 1px 1px 5px #3f0000
 
 .player
 	position: relative
@@ -174,6 +218,7 @@ body
 	cursor: pointer
 	transition: all .5s linear
 	display: flex
+	// font-family: Beresta
 	img
 		float: left
 	&-name
@@ -192,18 +237,34 @@ body
 		width: 330px
 		cursor: default
 		border-color: white
+		box-shadow: 1px 1px 4px #fff
 		&-wrapper
 			width: 200px
 			height: 60px
 			position: absolute
 		&-list
+			//SLEVA
 			position: fixed
 			height: 100%
 			width: 370px
-			background: $aside-bg
+			// background: $aside-bg
+			background: url(../img/bg1.jpg) no-repeat left center
+			background-size: cover
 			padding: 20px
 			z-index: 10
-			// box-shadow: 5px 0 8px $aside-bg
+			box-shadow: 0px 0 4px 5px $grey, inset -5px 0 13px $grey
+			border-right: 2px solid $grey
+			// &::before
+			// 	display: block
+			// 	content: ''
+			// 	position: absolute
+			// 	width: 100%
+			// 	height: 100%
+			// 	top: 0
+			// 	left: 0
+			// 	background: url(../img/bg1.jpg) no-repeat left center
+			// 	background-size: cover
+			// 	opacity: 0.8
 	&-record
 		width: 330px
 		cursor: default
@@ -246,14 +307,20 @@ body
 		background: #cd7f3277
 
 .game
+	//SPRAVA
 	position: fixed
 	height: 100%
 	width: 370px
 	right: 0
-	background: $aside-bg
+	// background: $aside-bg
+	background: url(../img/bg1.jpg) no-repeat right center
+	background-size: cover
 	padding: 20px
 	z-index: 10
-	// box-shadow: -5px 0 8px $aside-bg
+	box-shadow: 0px 0 4px 5px $grey, inset 5px 0 13px $grey
+	border-left: 2px solid $grey
+	// font-family: Beresta
+	letter-spacing: 1px
 	&-labels
 		p
 			font-size: 30px
@@ -268,13 +335,16 @@ body
 		position: fixed
 		width: 400px
 		height: 180px
-		background: #ccc
+		background: linear-gradient(45deg, #1F1C18, $grey)
 		top: 50%
 		left: 50%
 		transform: translate(-50%, -50%)
 		padding: 30px 10px
 		z-index: 961
 		text-align: center
+		box-shadow: 4px 4px 7px #000000
+		border: 2px solid #6f0000
+		color: white
 		p
 			font-size: 24px
 			display: inline-block
@@ -301,7 +371,7 @@ body
 	top: 0
 	left: 50%
 	transform: translate(-50%, 0)
-	background: $aside-bg
+	background: rgba(0, 0, 0, .5)
 .gameover
 	position: fixed
 	width: 400px
@@ -329,6 +399,7 @@ body
 	width: 100%
 	height: 50px
 	bottom: 0
+	// font-family: Beresta
 	div
 		height: 100%
 		width: 70px
