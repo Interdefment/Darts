@@ -1,6 +1,6 @@
 /** initial setup **/
 .nano {
-  /* position : relative; */
+  position : relative;
   overflow : hidden;
 }
 .nano > .nano-content {

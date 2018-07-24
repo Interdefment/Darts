@@ -68,8 +68,8 @@
 						<img src="img/avatars/noname.png" alt="" class="new-avatar" @click="openAvatarLib">
 					</div>
 					<div class="choosen nano">
-						<div class="nano-content">
 							<h6>Выбранные игроки</h6>
+							<div class="nano-content">
 							<transition-group name="players">
 								<div
 									v-for="(player, index) in pickedPlayers"
@@ -133,6 +133,26 @@
 				</div>
 			</div>
 		</transition>
+
+		<div class="statistic">
+			<p>Бросков: {{ players[1].stats.shoots }}</p>
+			<p>Очков: {{ players[1].stats.points }}</p>
+			<p>В молоко: {{ players[1].stats.zero }}</p>
+			<p>Попаданий: {{ players[1].stats.single + players[1].stats.double + players[1].stats.triple }}</p>
+			<p>Без бонусов: {{ players[1].stats.single }}</p>
+			<p>Удвоений: {{ players[1].stats.double }}</p>
+			<p>Утроений: {{ players[1].stats.triple }}</p>
+			<p>В 25: {{ players[1].stats.outer }}</p>
+			<p>В 50: {{ players[1].stats.inner }}</p>
+			<p>Промахов: {{ players[1].stats.another }}</p>
+			<p>В соседний сектор: {{ players[1].stats.sibling }}</p>
+			<p>Результаты за сет:</p>
+			<p>0 попаданий: {{ players[1].stats.misshot }}</p>
+			<p>1 попадание: {{ players[1].stats.oneshot }}</p>
+			<p>2 попадания: {{ players[1].stats.twoshot }}</p>
+			<p>3 попадания: {{ players[1].stats.threeshot }}</p>
+
+		</div>
 
 		<div class="player-active-list nano">
 			<template v-if="!gameover">
@@ -219,7 +239,7 @@
 									:style="'transform: rotate(' + index * 18 + 'deg) skewY(' + 108 + 'deg)'"
 									:points="index"
 									class="sector"
-									@click.stop="shoot(sector, sector == currentSector, 1)"
+									@click.stop="shoot(sector, sector == currentSector, 1, true)"
 								></div>
 							<div class="mid25"
 								@click.stop="shoot(25, 50 == currentSector, 1);"
