@@ -3,24 +3,34 @@ var darts = new Vue({
 	data: {
 		sectors: [20, 1 ,18, 4, 13, 6, 10, 15, 2, 17, 3, 19, 7, 16, 8, 11, 14, 9, 12, 5],
 		players: [
-			{ id: 1, name: 'Саша Р', points: 0, totalPoints: 0, avatar: 94, picked: false, stats: {
-				shoots: 0, points: 0, zero: 0, misshot: 0, oneshot: 0, twoshot: 0, threeshot: 0, another: 0, single: 0, double: 0, triple: 0, outer: 0, inner: 0, accuracy: 0, sibling: 0,
+			{ id: 1, name: 'Саша Р', points: 0, totalPoints: 0, avatar: 94, picked: false, statsShown: false, stats: {
+				shoots: 0, points: 0, zero: 0, misshot: 0, oneshot: 0, twoshot: 0, threeshot: 0, another: 0, single: 0, double: 0, triple: 0, outer: 0, inner: 0, accuracy: 0, sibling: 0, small: 0, big: 0, middleMiss: 0,
+				}, globalShown: false, globalStats: {
+					shoots: 0, points: 0, zero: 0, misshot: 0, oneshot: 0, twoshot: 0, threeshot: 0, another: 0, single: 0, double: 0, triple: 0, outer: 0, inner: 0, accuracy: 0, sibling: 0, maxScores: 0, minScores: 0, games: 0, small: 0, big: 0, middleMiss:0,
 				},
 			},
-			{ id: 2, name: 'Дима', points: 0, totalPoints: 0, avatar: 19, picked: false, stats: {
-				shoots: 0, points: 0, zero: 0, misshot: 0, oneshot: 0, twoshot: 0, threeshot: 0, another: 0, single: 0, double: 0, triple: 0, outer: 0, inner: 0, accuracy: 0, sibling: 0,
+			{ id: 2, name: 'Дима', points: 0, totalPoints: 0, avatar: 19, picked: false, statsShown: false, stats: {
+				shoots: 0, points: 0, zero: 0, misshot: 0, oneshot: 0, twoshot: 0, threeshot: 0, another: 0, single: 0, double: 0, triple: 0, outer: 0, inner: 0, accuracy: 0, sibling: 0, small: 0, big: 0, middleMiss: 0,
+				}, globalShown: false, globalStats: {
+					shoots: 0, points: 0, zero: 0, misshot: 0, oneshot: 0, twoshot: 0, threeshot: 0, another: 0, single: 0, double: 0, triple: 0, outer: 0, inner: 0, accuracy: 0, sibling: 0, maxScores: 0, minScores: 0, games: 0, small: 0, big: 0, middleMiss:0,
 				},
 			},
-			{ id: 3, name: 'Женя', points: 0, totalPoints: 0, avatar: 32, picked: false, stats: {
-				shoots: 0, points: 0, zero: 0, misshot: 0, oneshot: 0, twoshot: 0, threeshot: 0, another: 0, single: 0, double: 0, triple: 0, outer: 0, inner: 0, accuracy: 0, sibling: 0,
+			{ id: 3, name: 'Женя', points: 0, totalPoints: 0, avatar: 32, picked: false, statsShown: false, stats: {
+				shoots: 0, points: 0, zero: 0, misshot: 0, oneshot: 0, twoshot: 0, threeshot: 0, another: 0, single: 0, double: 0, triple: 0, outer: 0, inner: 0, accuracy: 0, sibling: 0, small: 0, big: 0, middleMiss: 0,
+				}, globalShown: false, globalStats: {
+					shoots: 0, points: 0, zero: 0, misshot: 0, oneshot: 0, twoshot: 0, threeshot: 0, another: 0, single: 0, double: 0, triple: 0, outer: 0, inner: 0, accuracy: 0, sibling: 0, maxScores: 0, minScores: 0, games: 0, small: 0, big: 0, middleMiss:0,
 				},
 			},
-			{ id: 4, name: 'Саша Т', points: 0, totalPoints: 0, avatar: 8, picked: false, stats: {
-				shoots: 0, points: 0, zero: 0, misshot: 0, oneshot: 0, twoshot: 0, threeshot: 0, another: 0, single: 0, double: 0, triple: 0, outer: 0, inner: 0, accuracy: 0, sibling: 0,
+			{ id: 4, name: 'Саша Т', points: 0, totalPoints: 0, avatar: 8, picked: false, statsShown: false, stats: {
+				shoots: 0, points: 0, zero: 0, misshot: 0, oneshot: 0, twoshot: 0, threeshot: 0, another: 0, single: 0, double: 0, triple: 0, outer: 0, inner: 0, accuracy: 0, sibling: 0, small: 0, big: 0, middleMiss: 0,
+				}, globalShown: false, globalStats: {
+					shoots: 0, points: 0, zero: 0, misshot: 0, oneshot: 0, twoshot: 0, threeshot: 0, another: 0, single: 0, double: 0, triple: 0, outer: 0, inner: 0, accuracy: 0, sibling: 0, maxScores: 0, minScores: 0, games: 0, small: 0, big: 0, middleMiss:0,
 				},
 			},
-			{ id: 5, name: 'Андрей', points: 0, totalPoints: 0, avatar: 4, picked: false, stats: {
-				shoots: 0, points: 0, zero: 0, misshot: 0, oneshot: 0, twoshot: 0, threeshot: 0, another: 0, single: 0, double: 0, triple: 0, outer: 0, inner: 0, accuracy: 0, sibling: 0,
+			{ id: 5, name: 'Андрей', points: 0, totalPoints: 0, avatar: 4, picked: false, statsShown: false, stats: {
+				shoots: 0, points: 0, zero: 0, misshot: 0, oneshot: 0, twoshot: 0, threeshot: 0, another: 0, single: 0, double: 0, triple: 0, outer: 0, inner: 0, accuracy: 0, sibling: 0, small: 0, big: 0, middleMiss: 0,
+				}, globalShown: false, globalStats: {
+					shoots: 0, points: 0, zero: 0, misshot: 0, oneshot: 0, twoshot: 0, threeshot: 0, another: 0, single: 0, double: 0, triple: 0, outer: 0, inner: 0, accuracy: 0, sibling: 0, maxScores: 0, minScores: 0, games: 0, small: 0, big: 0, middleMiss:0,
 				},
 			},
 		],
@@ -55,6 +65,9 @@ var darts = new Vue({
 			outer: 0,
 			inner: 0,
 			sibling: 0,
+			middleMiss: 0,
+			small: 0,
+			big: 0,
 		},
 	},
 	computed: {
@@ -79,65 +92,6 @@ var darts = new Vue({
 			for (let i = 1; i < 19; i ++) {
 				if (this.sectors[i] == sector)
 					return [this.sectors[i - 1], this.sectors[i + 1]];
-			};
-		},
-		analyze: function analyze (scores, mult, isSmall) {
-			this.set.shoots++;
-			let id = this.pickedPlayers[this.currentPlayer].id - 1;
-			let siblings = this.getSiblings(this.currentSector);
-			if (mult == 0) {
-				this.set.zero++;
-				if (this.currentSector == 50 && isSmall)
-					this.set.sibling++;
-			} else if (scores == this.currentSector || (scores * 2 == 50 && this.currentSector == 50)) {
-				this.set.points += mult * scores;
-				if (this.currentSector == 50) {
-					switch (scores) {
-						case 50:
-							this.set.points += 50;
-							this.set.inner++;
-							break;
-						case 25:
-							this.set.points += 25;
-							this.set.outer++;
-							break;
-					}
-				}
-				switch (mult) {
-					case 1:
-						this.set.single++;
-						break;
-					case 2:
-						this.set.double++;
-						break;
-					case 3:
-						this.set.triple++;
-						break;
-				};
-			} else {
-				this.set.another++;
-				if (scores == siblings[0] || scores == siblings[1])
-					this.set.sibling++;
-			};
-			if (this.clickCounter == 2) {
-				switch (this.set.zero + this.set.another) {
-					case 0:
-						this.set.threeshot++;
-						break;
-					case 1:
-						this.set.twoshot++;
-						break;
-					case 2:
-						this.set.oneshot++;
-						break;
-					case 3:
-						this.set.misshot++;
-						break;
-				};
-				for (s in this.set) {
-					this.players[id].stats[s] += this.set[s];
-					this.set[s] = 0;
-				}
 			};
 		},
 		showMessage: function message (text) {
@@ -233,12 +187,88 @@ var darts = new Vue({
 		},
 		winFunction: function win () {
 			this.gameover = true;
+			for (player in pickedPlayers) {
+				player.globalStats.games++;
+				if (player.stats.points > player.globalStats.maxScores)
+					player.globalStats.maxScores = player.stats.points;
+				if (player.stats.points < player.globalStats.minScores)
+					player.globalStats.minScores = player.stats.points;
+				for (stat in player.stats) {
+					player.globalStats[stat] += player.stats[stat];
+				}
+			}
 		},
 		reload: function reload () {
 			window.location.reload();
 		},
+		analyze: function analyze (scores, mult, isSmall) {
+			this.set.shoots++;
+			let id = this.pickedPlayers[this.currentPlayer].id - 1;
+			let siblings = this.getSiblings(this.currentSector);
+			if (mult == 0) {
+				this.set.zero++;
+				if (this.currentSector == 50 && isSmall)
+					this.set.sibling++;
+			} else if (scores == this.currentSector || (scores * 2 == 50 && this.currentSector == 50)) {
+				this.set.points += mult * scores;
+				if (this.currentSector == 50) {
+					switch (scores) {
+						case 50:
+							this.set.points += 50;
+							this.set.inner++;
+							break;
+						case 25:
+							this.set.points += 25;
+							this.set.outer++;
+							break;
+					}
+				}
+				switch (mult) {
+					case 1:
+						this.set.single++;
+						if (isSmall)
+							this.set.small++;
+						else
+							this.set.big++;
+						break;
+					case 2:
+						this.set.double++;
+						break;
+					case 3:
+						this.set.triple++;
+						break;
+				};
+			} else {
+				this.set.another++;
+				if (scores == 25) {
+					this.set.middleMiss++;
+				}
+				if (scores == siblings[0] || scores == siblings[1])
+					this.set.sibling++;
+			};
+			if (this.clickCounter == 2) {
+				switch (this.set.zero + this.set.another) {
+					case 0:
+						this.set.threeshot++;
+						break;
+					case 1:
+						this.set.twoshot++;
+						break;
+					case 2:
+						this.set.oneshot++;
+						break;
+					case 3:
+						this.set.misshot++;
+						break;
+				};
+				for (s in this.set) {
+					this.players[id].stats[s] += this.set[s];
+					this.set[s] = 0;
+				};
+			};
+		},
 		shoot: function shoot (scores, hit, multiplicator, isSmall = false) {
-			this.analyze(scores, multiplicator, isSmall)
+			this.analyze(scores, multiplicator, isSmall);
 			switch (this.clickCounter) {
 				case 0:
 					this.first = scores * multiplicator;
@@ -298,6 +328,6 @@ $('.avatar-lib .avatar').on('click', function(e) {
 $(document).ready(function() {
 	$(".nano").nanoScroller({falsh:true });
 	// $($('.player-pick')[0]).click();
-	// $($('.player-pick')).click();
-	// $('.start-play').click();
+	$($('.player-pick')).click();
+	$('.start-play').click();
 });

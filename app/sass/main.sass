@@ -130,11 +130,11 @@ body
 		letter-spacing: 1px
 .statistic
 	position: fixed
-	background: #bbbbbb
-	width: 200px
+	background: #ffffff
+	width: 180px
 	height: 500px
 	top: 0
-	left: 0
+	left: 190px
 	z-index: 1000
 	font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif
 .aside
@@ -227,6 +227,7 @@ body
 	cursor: pointer
 	transition: all .5s linear
 	display: flex
+	overflow: hidden
 	// font-family: Beresta
 	img
 		float: left
@@ -264,7 +265,7 @@ body
 			box-shadow: 0px 0 4px 5px $grey, inset -5px 0 13px $grey
 			border-right: 2px solid $grey
 			.nano-content
-				height: calc(100% - 100px)
+				height: calc(100% - 80px)
 				top: 20px
 				left: 20px
 	&-record
@@ -279,12 +280,15 @@ body
 			z-index: 10
 			.nano-content
 				padding-top: 20px
-
+			.player-active p.player-points
+				line-height: 60px
+				top: 3px
+				vertical-align: middle
 	&-stats
 		position: absolute
 		width: 30px
 		height: 30px
-		bottom: 5px
+		top: 35px
 		right: 80px
 		cursor: pointer
 	p.player-points
@@ -309,6 +313,39 @@ body
 		box-shadow: 3px 3px 5px  $bronze
 		border-color: $bronze
 		background: #cd7f3277
+	&-info
+		position: relative
+		width: 100%
+		margin-top: 65px
+		color: #ffffff
+		text-shadow: 1px 1px 1px #000000
+		letter-spacing: 1px
+		font-size: 17px
+		padding: 0px 10px 10px 75px
+		font-weight: lighter
+		span
+			color: #090
+			&.red
+				color: #900
+		&-global
+			position: absolute
+			right: 0
+			top: 0px
+			font-size: 15px
+			text-decoration: underline
+			cursor: pointer
+			color: #aaf
+	&.showstat
+		height: 480px
+		.set
+			padding-left: 15px
+			&-start
+				padding-top: 8px
+		&.global
+			height: 550px
+			.player-info-global
+				color: #090
+
 
 .game
 	//SPRAVA
