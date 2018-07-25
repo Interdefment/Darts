@@ -50,7 +50,7 @@
 								v-for="(player, index) in freePlayers"
 								:key="player.id"
 								class="player player-pick"
-								@click="pickPlayer(player, index)"
+								@click="pickPlayer(player)"
 							>
 							<img :src="'img/avatars/' + player.avatar + '.png'" alt="" class="pick-avatar">
 							<div class="player-name">{{ player.name }}</div></div>
