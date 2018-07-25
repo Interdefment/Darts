@@ -43,7 +43,7 @@ var darts = new Vue({
 		avatarPicked: 0,
 		notification: '',
 		messageDisabled: false,
-		currentSector: 1,
+		currentSector: 50,
 		turnEnded: false,
 		currentPoints: 0,
 		gameover: false,
@@ -216,8 +216,6 @@ var darts = new Vue({
 			let siblings = this.getSiblings(this.currentSector);
 			if (mult == 0) {
 				this.set.zero++;
-				if (this.currentSector == 50 && isSmall)
-					this.set.sibling++;
 			} else if (scores == this.currentSector || (scores * 2 == 50 && this.currentSector == 50)) {
 				this.set.points += mult * scores;
 				if (this.currentSector == 50) {
@@ -249,11 +247,18 @@ var darts = new Vue({
 				};
 			} else {
 				this.set.another++;
-				if (scores == 25) {
-					this.set.middleMiss++;
-				}
-				if (scores == siblings[0] || scores == siblings[1])
-					this.set.sibling++;
+				switch(this.currentSector) {
+					case 50:
+						if (isSmall)
+							this.set.sibling++;
+							break;
+					default:
+						if (scores == 25) {
+							this.set.middleMiss++;
+						};
+						if (scores == siblings[0] || scores == siblings[1])
+							this.set.sibling++;
+				};
 			};
 			if (this.clickCounter == 2) {
 				switch (this.set.zero + this.set.another) {
