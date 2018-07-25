@@ -143,7 +143,14 @@ var darts = new Vue({
 				points: 0,
 				totalPoints: 0,
 				avatar: this.avatarPicked,
-				picked: true
+				picked: true, statsShown: false,
+				stats: {
+					shoots: 0, points: 0, zero: 0, misshot: 0, oneshot: 0, twoshot: 0, threeshot: 0, another: 0, single: 0, double: 0, triple: 0, outer: 0, inner: 0, accuracy: 0, sibling: 0, small: 0, big: 0, middleMiss: 0,
+				},
+				globalShown: false,
+				globalStats: {
+					shoots: 0, points: 0, zero: 0, misshot: 0, oneshot: 0, twoshot: 0, threeshot: 0, another: 0, single: 0, double: 0, triple: 0, outer: 0, inner: 0, accuracy: 0, sibling: 0, maxScores: 0, minScores: 0, games: 0, small: 0, big: 0, middleMiss:0,
+				}
 			}
 			this.players.push(newPlayer);
 			this.pickedPlayers.push(newPlayer);
@@ -328,6 +335,6 @@ $('.avatar-lib .avatar').on('click', function(e) {
 $(document).ready(function() {
 	$(".nano").nanoScroller({falsh:true });
 	// $($('.player-pick')[0]).click();
-	$($('.player-pick')).click();
-	$('.start-play').click();
+	// $($('.player-pick')).click();
+	// $('.start-play').click();
 });
