@@ -177,7 +177,7 @@
 							<template v-else>
 								<p>Игр: <span :class="{ 'red': player.globalStats.games == 0 }">{{ player.globalStats.games }}</span></p>
 								<p>Максимум за игру: <span :class="{ 'red': player.globalStats.maxScores == 0 }">{{ player.globalStats.maxScores }}</span></p>
-								<p>Минимум за игру: <span :class="{ 'red': player.globalStats.minScores == 0 }">{{ player.globalStats.minScores }}</span></p>
+								<p>Минимум за игру: <span :class="{ 'red': player.globalStats.minScores == 0 || player.globalStats.minScores == 9999}">{{ player.globalStats.minScores == 9999 ? 0 : player.globalStats.minScores }}</span></p>
 								<p>Среднее за игру: <span :class="{ 'red': player.globalStats.games == 0 }">{{ player.globalStats.games > 0 ? player.globalStats.games / player.globalStats.points : 0 }}</span></p>
 								<p>Попаданий: <span :class="{ 'red': player.globalStats.single + player.globalStats.double + player.globalStats.triple == 0 }">{{ player.globalStats.single + player.globalStats.double + player.globalStats.triple }}</span></p>
 								<p>Точность: <span :class="[{ 'red': player.globalStats.single + player.globalStats.double + player.globalStats.triple == 0 }, 'ignore']">{{ player.globalStats.games > 0 ? ((player.globalStats.single + player.globalStats.double + player.globalStats.triple) / player.globalStats.shoots).toFixed(2) * 100 : 0 }}%</span></p>

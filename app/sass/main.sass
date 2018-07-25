@@ -23,7 +23,7 @@ body
 	box-sizing: border-box
 #bg
 	position: fixed
-	background: url(../img/bg.jpg) no-repeat center center
+	background: url(../img/bg.jpg) no-repeat center center #E0B582
 	background-size: cover
 	height: 100%
 	width: 100%
@@ -78,7 +78,7 @@ body
 	height: 50px
 	bottom: 30px
 	left: 200px
-	background: url(../img/bg-btn.jpg) center center no-repeat
+	background: url(../img/start-btn.jpg) center center no-repeat #427846
 	background-size: cover
 	color: #fff
 	font-size: 30px
@@ -99,7 +99,7 @@ body
 	top: 50%
 	left: 50%
 	transform: translate(-50%, -50%)
-	background: url(../img/bg-pick.jpg) center center no-repeat
+	background: url(../img/bg-pick.jpg) center center no-repeat #2A2627
 	box-shadow: 5px 5px 14px #000
 	border: 3px solid #000000
 	background-size: cover
@@ -147,7 +147,7 @@ body
 		padding: 10px 30px
 		background: rgba(0, 0, 0, .3)
 		.nano-content
-			padding-top: 70px
+			top: 65px
 			padding-left: 10px
 	.add-player
 		width: 100%
@@ -169,7 +169,7 @@ body
 		height: 50px
 		margin: 20px 0px
 		float: left
-		background: url(../img/add-btn.jpg) center top no-repeat
+		background: url(../img/add-btn.jpg) center top no-repeat #212121
 		// background: linear-gradient(45deg	, #050505, $grey);
 		// background-size: cover
 		border: 1px solid #222
@@ -197,7 +197,6 @@ body
 .avatar-lib
 	width: 600px
 	height: 600px
-	background: linear-gradient(-135deg, #470000, #190a05)
 	background: url(../img/library.png) center center no-repeat
 	box-shadow: 3px 3px 15px #1f0900
 	background-size: cover
@@ -222,9 +221,11 @@ body
 	height: 70px
 	padding: 4px
 	border: 1px solid #ccc
-	background: rgba(255, 255, 255, .3)
+	background: rgba(255, 255, 255, .15)
 	margin-bottom: 20px
 	cursor: pointer
+	color: #ffffff
+	text-shadow: 1px 1px 1px #000000
 	transition: all .5s linear
 	display: flex
 	overflow: hidden
@@ -258,7 +259,7 @@ body
 			height: 100%
 			width: 370px
 			// background: $aside-bg
-			background: url(../img/bg1.jpg) no-repeat left center
+			background: url(../img/bg1.jpg) no-repeat left center #262626
 			background-size: cover
 			padding: 20px
 			z-index: 10
@@ -304,15 +305,15 @@ body
 	&.gold
 		box-shadow: 3px 3px 5px  $gold
 		border-color: $gold
-		background: #ffd70077
+		background: #ffd70098
 	&.silver
 		box-shadow: 3px 3px 5px  $silver
 		border-color: $silver
-		background: #c0c0c077
+		background: #c0c0c098
 	&.bronze
 		box-shadow: 3px 3px 5px  $bronze
 		border-color: $bronze
-		background: #cd7f3277
+		background: #cd7f3298
 	&-info
 		position: relative
 		width: 100%
@@ -322,9 +323,9 @@ body
 		letter-spacing: 1px
 		font-size: 17px
 		padding: 0px 10px 10px 75px
-		font-weight: lighter
 		span
 			color: #090
+			// font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif
 			&.red
 				color: #900
 		&-global
@@ -354,7 +355,7 @@ body
 	width: 370px
 	right: 0
 	// background: $aside-bg
-	background: url(../img/bg1.jpg) no-repeat right center
+	background: url(../img/bg1.jpg) no-repeat right center #262626
 	background-size: cover
 	padding: 20px
 	z-index: 10
