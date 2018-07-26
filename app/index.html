@@ -114,7 +114,7 @@
 						{{ pickedPlayers[currentPlayer].name }} бросил на {{ currentPoints }} очков
 					</p>
 					<div class="turn-correct turn-btn" @click="correct">Корректировать</div>
-					<div class="turn-next turn-btn" v-if="currentPlayer == pickedPlayers.length && currentSector == 50" @click="nextTurn">Завершить</div>
+					<div class="turn-next turn-btn" v-if="currentPlayer == pickedPlayers.length - 1 && currentSector == 50" @click="nextTurn">Завершить</div>
 					<div class="turn-next turn-btn" v-else @click="nextTurn">Следующий!</div>
 				</div>
 			</div>
@@ -125,7 +125,7 @@
 				style="z-index: 960"
 				v-if="gameover"
 			>
-				<div class="gameover">
+				<div class="gameover turn-end">
 					<p class="turn-info">
 						{{ playersRating[0].name }} победил со счетом {{ playersRating[0].points }} очков!!!
 					</p>
@@ -135,7 +135,7 @@
 		</transition>
 
 		<div class="player-active-list nano">
-			<template v-if="!gameover">
+			<template>
 				<div class="nano-content">
 					<div
 						v-for="(player, index) in pickedPlayers"
@@ -156,8 +156,8 @@
 							</div>
 							<template v-if="!player.globalShown">
 								<p>Бросков: <span :class="{ 'red': player.stats.shoots == 0 }">{{ player.stats.shoots }}</span></p>
-								<p>Попаданий: <span :class="{ 'red': player.stats.single + player.stats.double + player.stats.triple == 0 }">{{ player.stats.single + player.stats.double + player.stats.triple }}</span></p>
-								<p>Точность: <span :class="[{ 'red': player.stats.single + player.stats.double + player.stats.triple == 0 }, 'ignore']">{{ player.stats.shoots > 0 ? ((player.stats.single + player.stats.double + player.stats.triple) / player.stats.shoots).toFixed(2) * 100 : 0 }}%</span></p>
+								<p>Попаданий: <span :class="{ 'red': player.stats.single + player.stats.double + player.stats.triple + player.stats.outer + player.stats.inner == 0 }">{{ player.stats.single + player.stats.double + player.stats.triple + player.stats.outer + player.stats.inner }}</span></p>
+								<p>Точность: <span :class="[{ 'red': player.stats.single + player.stats.double + player.stats.triple + player.stats.outer + player.stats.inner == 0 }, 'ignore']">{{ player.stats.shoots > 0 ? ((player.stats.single + player.stats.double + player.stats.triple + player.stats.outer + player.stats.inner) / player.stats.shoots).toFixed(2) * 100 : 0 }}%</span></p>
 								<p>Не в тот сектор: <span :class="{ 'red': player.stats.another == 0 }">{{ player.stats.another }}</span></p>
 								<p>Не попал в мишень: <span :class="{ 'red': player.stats.zero == 0 }">{{ player.stats.zero }}</span></p>
 								<p>В большой круг: <span :class="{ 'red': player.stats.big == 0 }">{{ player.stats.big }}</span></p>
@@ -178,9 +178,9 @@
 								<p>Игр: <span :class="{ 'red': player.globalStats.games == 0 }">{{ player.globalStats.games }}</span></p>
 								<p>Максимум за игру: <span :class="{ 'red': player.globalStats.maxScores == 0 }">{{ player.globalStats.maxScores }}</span></p>
 								<p>Минимум за игру: <span :class="{ 'red': player.globalStats.minScores == 0 || player.globalStats.minScores == 9999}">{{ player.globalStats.minScores == 9999 ? 0 : player.globalStats.minScores }}</span></p>
-								<p>Среднее за игру: <span :class="{ 'red': player.globalStats.games == 0 }">{{ player.globalStats.games > 0 ? player.globalStats.games / player.globalStats.points : 0 }}</span></p>
-								<p>Попаданий: <span :class="{ 'red': player.globalStats.single + player.globalStats.double + player.globalStats.triple == 0 }">{{ player.globalStats.single + player.globalStats.double + player.globalStats.triple }}</span></p>
-								<p>Точность: <span :class="[{ 'red': player.globalStats.single + player.globalStats.double + player.globalStats.triple == 0 }, 'ignore']">{{ player.globalStats.games > 0 ? ((player.globalStats.single + player.globalStats.double + player.globalStats.triple) / player.globalStats.shoots).toFixed(2) * 100 : 0 }}%</span></p>
+								<p>Среднее за игру: <span :class="{ 'red': player.globalStats.games == 0 }">{{ player.globalStats.games > 0 ? player.globalStats.points / player.globalStats.games : 0 }}</span></p>
+								<p>Попаданий: <span :class="{ 'red': player.globalStats.single + player.globalStats.double + player.globalStats.triple + player.globalStats.outer + player.globalStats.inner == 0 }">{{ player.globalStats.single + player.globalStats.double + player.globalStats.triple + player.globalStats.outer + player.globalStats.inner }}</span></p>
+								<p>Точность: <span :class="[{ 'red': player.globalStats.single + player.globalStats.double + player.globalStats.triple + player.globalStats.outer + player.globalStats.inner == 0 }, 'ignore']">{{ player.globalStats.games > 0 ? ((player.globalStats.single + player.globalStats.double + player.globalStats.triple + player.globalStats.outer + player.globalStats.inner) / player.globalStats.shoots).toFixed(2) * 100 : 0 }}%</span></p>
 								<p>Не в тот сектор: <span :class="{ 'red': player.globalStats.another == 0 }">{{ player.globalStats.another }}</span></p>
 								<p>Не попал в мишень: <span :class="{ 'red': player.globalStats.zero == 0 }">{{ player.globalStats.zero }}</span></p>
 								<p>В большой круг: <span :class="{ 'red': player.globalStats.big == 0 }">{{ player.globalStats.big }}</span></p>
@@ -200,7 +200,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="set-points">
+				<div class="set-points" v-if="!gameover">
 					<div class="first">{{ first }}</div>
 					<div class="second">{{ second }}</div>
 					<div class="third">{{ third }}</div>
