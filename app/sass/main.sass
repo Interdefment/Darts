@@ -92,6 +92,35 @@ body
 	&:active
 		box-shadow: 2px 2px 5px #121, -1px -1px 2px #121
 
+.delete
+	width: 20px
+	height: 20px
+	position: absolute
+	right: 5px
+	top: 5px
+	&::before
+		display: block
+		content: ''
+		position: absolute
+		top: 0
+		left: 0
+		width: 26px
+		height: 4px
+		background: #900
+		transform-origin: 0 50%
+		transform: rotateZ(45deg) translate(1px, -1px)
+	&::after
+		display: block
+		content: ''
+		position: absolute
+		bottom: 0
+		left: 0
+		width: 26px
+		height: 4px
+		background: #900
+		transform-origin: 0 50%
+		transform: rotateZ(-45deg) translate(-1px, 2px)
+
 .pick
 	position: fixed
 	width: 1006px
@@ -391,6 +420,14 @@ body
 			font-size: 24px
 			display: inline-block
 			height: 80px
+		&.delete-msg
+			height: 240px
+			.input-text
+				margin: 10px auto 20px
+				width: 300px
+			.delete-btn
+				border: none
+				font-family: $font
 	&-btn
 		display: inline-block
 		height: 40px

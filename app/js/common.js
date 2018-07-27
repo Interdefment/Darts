@@ -38,6 +38,9 @@ var darts = new Vue({
 			small: 0,
 			big: 0,
 		},
+		deleteConf: false,
+		deleteSecret: '',
+		deleteId: 0,
 	},
 	computed: {
 		freePlayers: function () {
@@ -396,6 +399,37 @@ var darts = new Vue({
 			} else {
 				this.currentPlayer = this.currentPlayer + 1;
 			}
+		},
+		goDelete: function (player) {
+			this.deleteConf = true;
+			this.deleteId = player.idDB;
+			$('.delete-text').text('Чтобы удалить пользователя ' + player.name + ' введите серкетный код.');
+		},
+		deleteUser: function () {
+			let delData = {};
+			delData["user_id"] = this.deleteId;
+			delData['secret_word'] = this.deleteSecret;
+			this.deleteSecret = '';
+			this.deleteConf = false;
+			$.ajax({
+				url: 'https://darts-api.herokuapp.com/api/v1/delete_player/',
+				method: 'POST',
+				data: delData,
+				chached: false,
+				success: function(data) {
+					darts.showMessage('Пользователь успешно удален');
+					for (let i = 0; i < darts.players.length; i++) {
+						if (darts.players[i].idDB == darts.deleteId) {
+							darts.players.splice(i, 1);
+							break;
+						}
+					}
+				},
+				error: function (err) {
+					darts.showMessage('Не удалось удалить пользователя');
+					console.log(err.responseText);
+				}
+			})
 		},
 	},
 	mounted: function () {

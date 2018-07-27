@@ -38,6 +38,22 @@
 		<transition name="fade">
 			<div
 				id="overlay"
+				style="z-index: 960"
+				v-show="deleteConf"
+			>
+				<div class="turn-end delete-msg">
+					<p class="turn-info  delete-text"></p>
+					<form name="deleting" id="deleting" @submit.prevent="deleteUser">
+						<input type="text" class="input-text" v-model="deleteSecret" placeholder="Введите секретный код">
+						<div class="turn-correct turn-btn" @click="deleteConf = false">Отмена</div>
+						<input value="Удалить" class="turn-next turn-btn delete-btn" type="submit">
+					</form>
+				</div>
+			</div>
+		</transition>
+		<transition name="fade">
+			<div
+				id="overlay"
 				v-if="!overlayClosed"
 			>
 			<div class="pick"
@@ -52,8 +68,10 @@
 								class="player player-pick"
 								@click="pickPlayer(player)"
 							>
-							<img :src="'img/avatars/' + player.avatar + '.png'" alt="" class="pick-avatar">
-							<div class="player-name">{{ player.name }}</div></div>
+								<div class="delete" @click.stop="goDelete(player)"></div>
+								<img :src="'img/avatars/' + player.avatar + '.png'" alt="" class="pick-avatar">
+								<div class="player-name">{{ player.name }}</div>
+							</div>
 						</transition-group>
 					</div>
 				</div>
