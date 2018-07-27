@@ -175,7 +175,7 @@
 							<template v-if="!player.globalShown">
 								<p>Бросков: <span :class="{ 'red': player.stats.shoots == 0 }">{{ player.stats.shoots }}</span></p>
 								<p>Попаданий: <span :class="{ 'red': player.stats.single + player.stats.double + player.stats.triple + player.stats.outer + player.stats.inner == 0 }">{{ player.stats.single + player.stats.double + player.stats.triple + player.stats.outer + player.stats.inner }}</span></p>
-								<p>Точность: <span :class="[{ 'red': player.stats.single + player.stats.double + player.stats.triple + player.stats.outer + player.stats.inner == 0 }, 'ignore']">{{ player.stats.shoots > 0 ? ((player.stats.single + player.stats.double + player.stats.triple + player.stats.outer + player.stats.inner) / player.stats.shoots).toFixed(2) * 100 : 0 }}%</span></p>
+								<p>Точность: <span :class="[{ 'red': player.stats.single + player.stats.double + player.stats.triple + player.stats.outer + player.stats.inner == 0 }, 'ignore']">{{ player.stats.shoots > 0 ? ((player.stats.single + player.stats.double + player.stats.triple + player.stats.outer + player.stats.inner) / player.stats.shoots * 100).toFixed(0) : 0 }}%</span></p>
 								<p>Не в тот сектор: <span :class="{ 'red': player.stats.another == 0 }">{{ player.stats.another }}</span></p>
 								<p>Не попал в мишень: <span :class="{ 'red': player.stats.zero == 0 }">{{ player.stats.zero }}</span></p>
 								<p>В большой круг: <span :class="{ 'red': player.stats.big == 0 }">{{ player.stats.big }}</span></p>
@@ -188,9 +188,9 @@
 								<p>Промахов по середине: <span :class="{ 'red': player.stats.middleMiss == 0 }">{{ player.stats.middleMiss }}</span></p>
 								<p class="set-start">Результаты за сет:</p>
 								<p class="set">0 попаданий: <span :class="[{ 'red': player.stats.misshot == 0 }, 'ignore']">{{ player.stats.misshot }} ({{ player.stats.misshot > 0 ? (player.stats.misshot / player.stats.shoots * 3 ).toFixed(2) * 100 : 0 }}%)</span></p>
-								<p class="set">1 попадание: <span :class="[{ 'red': player.stats.oneshot == 0 }, 'ignore']">{{ player.stats.oneshot }} ({{ player.stats.oneshot > 0 ? (player.stats.oneshot / player.stats.shoots * 3 ).toFixed(2) * 100 : 0 }}%)</span></p>
-								<p class="set">2 попадания: <span :class="[{ 'red': player.stats.twoshot == 0 }, 'ignore']">{{ player.stats.twoshot }} ({{ player.stats.twoshot > 0 ? (player.stats.twoshot / player.stats.shoots * 3 ).toFixed(2) * 100 : 0 }}%)</span></p>
-								<p class="set">3 попадания: <span :class="[{ 'red': player.stats.threeshot == 0 }, 'ignore']">{{ player.stats.threeshot }} ({{ player.stats.threeshot > 0 ? (player.stats.threeshot / player.stats.shoots * 3 ).toFixed(2) * 100 : 0 }}%)</span></p>
+								<p class="set">1 попадание: <span :class="[{ 'red': player.stats.oneshot == 0 }, 'ignore']">{{ player.stats.oneshot }} ({{ player.stats.oneshot > 0 ? (player.stats.oneshot / player.stats.shoots * 300).toFixed(0) : 0 }}%)</span></p>
+								<p class="set">2 попадания: <span :class="[{ 'red': player.stats.twoshot == 0 }, 'ignore']">{{ player.stats.twoshot }} ({{ player.stats.twoshot > 0 ? (player.stats.twoshot / player.stats.shoots * 300).toFixed(0) : 0 }}%)</span></p>
+								<p class="set">3 попадания: <span :class="[{ 'red': player.stats.threeshot == 0 }, 'ignore']">{{ player.stats.threeshot }} ({{ player.stats.threeshot > 0 ? (player.stats.threeshot / player.stats.shoots * 300).toFixed(0) : 0 }}%)</span></p>
 							</template>
 							<template v-else>
 								<p>Игр: <span :class="{ 'red': player.globalStats.games == 0 }">{{ player.globalStats.games }}</span></p>
@@ -198,7 +198,7 @@
 								<p>Минимум за игру: <span :class="{ 'red': player.globalStats.minScores == 0 || player.globalStats.minScores == 9999}">{{ player.globalStats.minScores == 9999 ? 0 : player.globalStats.minScores }}</span></p>
 								<p>Среднее за игру: <span :class="{ 'red': player.globalStats.games == 0 }">{{ player.globalStats.games > 0 ? player.globalStats.points / player.globalStats.games : 0 }}</span></p>
 								<p>Попаданий: <span :class="{ 'red': player.globalStats.single + player.globalStats.double + player.globalStats.triple + player.globalStats.outer + player.globalStats.inner == 0 }">{{ player.globalStats.single + player.globalStats.double + player.globalStats.triple + player.globalStats.outer + player.globalStats.inner }}</span></p>
-								<p>Точность: <span :class="[{ 'red': player.globalStats.single + player.globalStats.double + player.globalStats.triple + player.globalStats.outer + player.globalStats.inner == 0 }, 'ignore']">{{ player.globalStats.games > 0 ? ((player.globalStats.single + player.globalStats.double + player.globalStats.triple + player.globalStats.outer + player.globalStats.inner) / player.globalStats.shoots).toFixed(2) * 100 : 0 }}%</span></p>
+								<p>Точность: <span :class="[{ 'red': player.globalStats.single + player.globalStats.double + player.globalStats.triple + player.globalStats.outer + player.globalStats.inner == 0 }, 'ignore']">{{ player.globalStats.games > 0 ? ((player.globalStats.single + player.globalStats.double + player.globalStats.triple + player.globalStats.outer + player.globalStats.inner) / player.globalStats.shoots * 100).toFixed(0) : 0 }}%</span></p>
 								<p>Не в тот сектор: <span :class="{ 'red': player.globalStats.another == 0 }">{{ player.globalStats.another }}</span></p>
 								<p>Не попал в мишень: <span :class="{ 'red': player.globalStats.zero == 0 }">{{ player.globalStats.zero }}</span></p>
 								<p>В большой круг: <span :class="{ 'red': player.globalStats.big == 0 }">{{ player.globalStats.big }}</span></p>
@@ -210,10 +210,10 @@
 								<p>В соседний сектор: <span :class="{ 'red': player.globalStats.sibling == 0 }">{{ player.globalStats.sibling }}</span></p>
 								<p>Промахов по середине: <span :class="{ 'red': player.globalStats.middleMiss == 0 }">{{ player.globalStats.middleMiss }}</span></p>
 								<p class="set-start">Результаты за сет:</p>
-								<p class="set">0 попаданий: <span :class="[{ 'red': player.globalStats.misshot == 0 }, 'ignore']">{{ player.globalStats.misshot }} ({{ player.globalStats.misshot > 0 ? (player.globalStats.misshot / player.globalStats.shoots * 3 ).toFixed(2) * 100 : 0 }}%)</span></p>
-								<p class="set">1 попадание: <span :class="[{ 'red': player.globalStats.oneshot == 0 }, 'ignore']">{{ player.globalStats.oneshot }} ({{ player.globalStats.oneshot > 0 ? (player.globalStats.oneshot / player.globalStats.shoots * 3 ).toFixed(2) * 100 : 0 }}%)</span></p>
-								<p class="set">2 попадания: <span :class="[{ 'red': player.globalStats.twoshot == 0 }, 'ignore']">{{ player.globalStats.twoshot }} ({{ player.globalStats.twoshot > 0 ? (player.globalStats.twoshot / player.globalStats.shoots * 3 ).toFixed(2) * 100 : 0 }}%)</span></p>
-								<p class="set">3 попадания: <span :class="[{ 'red': player.globalStats.threeshot == 0 }, 'ignore']">{{ player.globalStats.threeshot }} ({{ player.globalStats.threeshot > 0 ? (player.globalStats.threeshot / player.globalStats.shoots * 3 ).toFixed(2) * 100 : 0 }}%)</span></p>
+								<p class="set">0 попаданий: <span :class="[{ 'red': player.globalStats.misshot == 0 }, 'ignore']">{{ player.globalStats.misshot }} ({{ player.globalStats.misshot > 0 ? (player.globalStats.misshot / player.globalStats.shoots * 300).toFixed(0) : 0 }}%)</span></p>
+								<p class="set">1 попадание: <span :class="[{ 'red': player.globalStats.oneshot == 0 }, 'ignore']">{{ player.globalStats.oneshot }} ({{ player.globalStats.oneshot > 0 ? (player.globalStats.oneshot / player.globalStats.shoots * 300).toFixed(0) : 0 }}%)</span></p>
+								<p class="set">2 попадания: <span :class="[{ 'red': player.globalStats.twoshot == 0 }, 'ignore']">{{ player.globalStats.twoshot }} ({{ player.globalStats.twoshot > 0 ? (player.globalStats.twoshot / player.globalStats.shoots * 300).toFixed(0) * 100 : 0 }}%)</span></p>
+								<p class="set">3 попадания: <span :class="[{ 'red': player.globalStats.threeshot == 0 }, 'ignore']">{{ player.globalStats.threeshot }} ({{ player.globalStats.threeshot > 0 ? (player.globalStats.threeshot / player.globalStats.shoots * 300).toFixed(0) * 100 : 0 }}%)</span></p>
 							</template>
 						</div>
 					</div>
