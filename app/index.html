@@ -212,8 +212,8 @@
 								<p class="set-start">Результаты за сет:</p>
 								<p class="set">0 попаданий: <span :class="[{ 'red': player.globalStats.misshot == 0 }, 'ignore']">{{ player.globalStats.misshot }} ({{ player.globalStats.misshot > 0 ? (player.globalStats.misshot / player.globalStats.shoots * 300).toFixed(0) : 0 }}%)</span></p>
 								<p class="set">1 попадание: <span :class="[{ 'red': player.globalStats.oneshot == 0 }, 'ignore']">{{ player.globalStats.oneshot }} ({{ player.globalStats.oneshot > 0 ? (player.globalStats.oneshot / player.globalStats.shoots * 300).toFixed(0) : 0 }}%)</span></p>
-								<p class="set">2 попадания: <span :class="[{ 'red': player.globalStats.twoshot == 0 }, 'ignore']">{{ player.globalStats.twoshot }} ({{ player.globalStats.twoshot > 0 ? (player.globalStats.twoshot / player.globalStats.shoots * 300).toFixed(0) * 100 : 0 }}%)</span></p>
-								<p class="set">3 попадания: <span :class="[{ 'red': player.globalStats.threeshot == 0 }, 'ignore']">{{ player.globalStats.threeshot }} ({{ player.globalStats.threeshot > 0 ? (player.globalStats.threeshot / player.globalStats.shoots * 300).toFixed(0) * 100 : 0 }}%)</span></p>
+								<p class="set">2 попадания: <span :class="[{ 'red': player.globalStats.twoshot == 0 }, 'ignore']">{{ player.globalStats.twoshot }} ({{ player.globalStats.twoshot > 0 ? (player.globalStats.twoshot / player.globalStats.shoots * 300).toFixed(0) : 0 }}%)</span></p>
+								<p class="set">3 попадания: <span :class="[{ 'red': player.globalStats.threeshot == 0 }, 'ignore']">{{ player.globalStats.threeshot }} ({{ player.globalStats.threeshot > 0 ? (player.globalStats.threeshot / player.globalStats.shoots * 300).toFixed(0) : 0 }}%)</span></p>
 							</template>
 						</div>
 					</div>
