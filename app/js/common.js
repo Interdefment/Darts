@@ -41,6 +41,7 @@ var darts = new Vue({
 		deleteConf: false,
 		deleteSecret: '',
 		deleteId: 0,
+		deleteClicker: 1,
 	},
 	computed: {
 		freePlayers: function () {
@@ -416,11 +417,15 @@ var darts = new Vue({
 				method: 'POST',
 				data: delData,
 				chached: false,
+				//FINISH HIM
 				success: function(data) {
 					darts.showMessage('Пользователь успешно удален');
 					for (let i = 0; i < darts.players.length; i++) {
 						if (darts.players[i].idDB == darts.deleteId) {
+							num = darts.players[i].avatar
 							darts.players.splice(i, 1);
+							const img = '<img src="img/avatars/' + num + '.png" alt="' + num + '" class="avatar" data-number="' + num + '">'
+							$('.avatar-lib .nano-content').append(img);
 							break;
 						}
 					}
@@ -431,22 +436,18 @@ var darts = new Vue({
 				}
 			})
 		},
+		deleteActive: function deleteActive (player, index) {
+			if (this.deleteClicker == 2) {
+				this.pickedPlayers.splice(index, 1);
+				this.players.splice(player.id - 1, 1);
+				this.deleteClicker = 1
+			} else {
+				this.deleteClicker++;
+				setTimeout(function() {darts.deleteClicker = 1}, 300);
+			}
+		},
 	},
 	mounted: function () {
-		setTimeout(() => {
-			for (let i = 1; i < 96; i++) {
-				if (this.checkAvatar(i)) {
-					continue;
-				}
-				let img = '<img src="img/avatars/' + i + '.png" alt="' + i + '" class="avatar" data-number="' + i + '">'
-				$('.avatar-lib .nano-content').append(img);
-			};
-			$('.avatar-lib .avatar').on('click', function() {
-				darts.pickAvatar($(this).attr('data-number'))
-			});
-		}, 700);
-	},
-	beforeCreate() {
 		$.ajax({
 			url: 'https://darts-api.herokuapp.com/api/v1/users_list/?format=json',
 			method: 'GET',
@@ -476,6 +477,16 @@ var darts = new Vue({
 					}
 					darts.players.push(newPlayer);
 				}
+				for (let i = 1; i < 96; i++) {
+					if (darts.checkAvatar(i)) {
+						continue;
+					}
+					let img = '<img src="img/avatars/' + i + '.png" alt="' + i + '" class="avatar" data-number="' + i + '">'
+					$('.avatar-lib .nano-content').append(img);
+				};
+				$('.avatar-lib .avatar').on('click', function() {
+					darts.pickAvatar($(this).attr('data-number'))
+				});
 			},
 			error: function(err){
 				console.log(err.responseText);
@@ -483,11 +494,13 @@ var darts = new Vue({
 			}
 		})
 	},
+	beforeCreate() {
+	},
 })
 
 $(document).ready(function() {
 	$(".nano").nanoScroller({falsh:true });
 	// $($('.player-pick')[0]).click();
-	// $($('.player-pick')[1]).click();
-	// $('.start-play').click();
+	// setTimeout(function() {
+	// 	$($('.player-pick')).click();$('.start-play').click();}, 500);
 });

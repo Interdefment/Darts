@@ -168,6 +168,7 @@
 							class="player-stats"
 							@click="player.statsShown = !player.statsShown">
 						<p class="player-points">Очки: {{ player.points }}</p>
+						<div class="delete delete-active" @click="deleteActive(player, index)"></div>
 						<div class="player-info">
 							<div class="player-info-global" @click="player.globalShown = !player.globalShown">
 								Глобальная
