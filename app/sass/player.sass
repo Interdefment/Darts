@@ -1,0 +1,132 @@
+@import "vars"
+.player
+	position: relative
+	width: 200px
+	height: 70px
+	padding: 4px
+	border: 1px solid #ccc
+	background: rgba(255, 255, 255, .15)
+	margin-bottom: 20px
+	cursor: pointer
+	color: #ffffff
+	text-shadow: 1px 1px 1px #000000
+	transition: all .5s linear
+	display: flex
+	overflow: hidden
+	// font-family: Beresta
+	img
+		float: left
+	&-name
+		display: table-cell
+		height: 60px
+		vertical-align: middle
+		font-size: 18px
+		padding-left: 10px
+	&-pick
+		display: inline-block
+		margin-left: 20px
+	&-choosen
+		width: 220px
+		display: block
+	&-active
+		width: 330px
+		cursor: default
+		border-color: white
+		box-shadow: 1px 1px 4px #fff
+		&-wrapper
+			width: 200px
+			height: 60px
+			position: absolute
+		&-list
+			//SLEVA
+			position: fixed
+			height: 100%
+			width: 370px
+			// background: $aside-bg
+			background: url(../img/bg1.jpg) no-repeat left center #262626
+			background-size: cover
+			padding: 20px
+			z-index: 10
+			box-shadow: 0px 0 4px 5px $grey, inset -5px 0 13px $grey
+			border-right: 2px solid $grey
+			.nano-content
+				height: calc(100% - 80px)
+				top: 20px
+				left: 20px
+	&-record
+		width: 330px
+		cursor: default
+		border-color: white
+		&-list
+			position: fixed
+			height: 100%
+			width: 370px
+			padding-left: 0
+			z-index: 10
+			.nano-content
+				padding-top: 20px
+			.player-active p.player-points
+				line-height: 60px
+				top: 3px
+				vertical-align: middle
+	&-stats
+		position: absolute
+		width: 30px
+		height: 30px
+		top: 35px
+		right: 80px
+		cursor: pointer
+	p.player-points
+		position: absolute
+		right: 40px
+		top: 6px
+		line-height: 1
+		font-size: 20px
+	&.active
+		box-shadow: 3px 3px 5px #0a0
+		border-color: #090
+		background: #00990044
+	&.gold
+		box-shadow: 3px 3px 5px  $gold
+		border-color: $gold
+		background: #ffd70098
+	&.silver
+		box-shadow: 3px 3px 5px  $silver
+		border-color: $silver
+		background: #c0c0c098
+	&.bronze
+		box-shadow: 3px 3px 5px  $bronze
+		border-color: $bronze
+		background: #cd7f3298
+	&-info
+		position: relative
+		width: 100%
+		margin-top: 65px
+		color: #ffffff
+		text-shadow: 1px 1px 1px #000000
+		letter-spacing: 1px
+		font-size: 17px
+		padding: 0px 10px 10px 75px
+		span
+			color: #090
+			// font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif
+			&.red
+				color: #900
+		&-global
+			position: absolute
+			right: 0
+			top: 0px
+			font-size: 15px
+			text-decoration: underline
+			cursor: pointer
+			color: #aaf
+	&.showstat
+		height: 480px
+		.set
+			padding-left: 15px
+			&-start
+				padding-top: 8px
+		&.global
+			height: 550px
+			.player-info-global
+				color: #090

@@ -1,7 +1,29 @@
 var darts = new Vue({
 	el: '#app',
 	data: {
-		sectors: [20, 1 ,18, 4, 13, 6, 10, 15, 2, 17, 3, 19, 7, 16, 8, 11, 14, 9, 12, 5],
+		sectoras: [20, 1 ,18, 4, 13, 6, 10, 15, 2, 17, 3, 19, 7, 16, 8, 11, 14, 9, 12, 5],
+		sectors: [
+			{ points: 6, startDeg: 351, },
+			{ points: 13, startDeg: 9 },
+			{ points: 4, startDeg: 27 },
+			{ points: 18, startDeg: 45 },
+			{ points: 1, startDeg: 63 },
+			{ points: 20, startDeg: 81 },
+			{ points: 5, startDeg: 99 },
+			{ points: 12, startDeg: 117 },
+			{ points: 9, startDeg: 135 },
+			{ points: 14, startDeg: 153 },
+			{ points: 11, startDeg: 171 },
+			{ points: 8, startDeg: 189 },
+			{ points: 16, startDeg: 207 },
+			{ points: 7, startDeg: 225 },
+			{ points: 19, startDeg: 243 },
+			{ points: 3, startDeg: 261 },
+			{ points: 17, startDeg: 279 },
+			{ points: 2, startDeg: 297 },
+			{ points: 15, startDeg: 315 },
+			{ points: 10, startDeg: 333 },
+		],
 		players: [],
 		pickedPlayers: [],
 		currentPlayer: 0,
@@ -42,19 +64,21 @@ var darts = new Vue({
 		deleteSecret: '',
 		deleteId: 0,
 		deleteClicker: 1,
+		hovSec: 0,
+		prevSec: 0
 	},
 	computed: {
-		freePlayers: function () {
-			return this.players.filter(function (player) {
-				return !player.picked
-			})
-		},
-		playersRating: function () {
-			var clone = this.pickedPlayers.slice(0);
-			return clone.sort(function(d1, d2){
-				return d1.points < d2.points
-			});
-		}
+		// freePlayers: function () {
+		// 	return this.players.filter(function (player) {
+		// 		return !player.picked
+		// 	})
+		// },
+		// playersRating: function () {
+		// 	var clone = this.pickedPlayers.slice(0);
+		// 	return clone.sort(function(d1, d2){
+		// 		return d1.points < d2.points
+		// 	});
+		// }
 	},
 	methods: {
 		/**
@@ -460,61 +484,169 @@ var darts = new Vue({
 				setTimeout(function() {darts.deleteClicker = 1}, 300);
 			}
 		},
+		getDegrees: function (notX, y) {
+			const x = notX != 0 ? notX : 1
+			const tg = (y / x);
+			const arctg = Math.atan(tg) * 180 / Math.PI;
+
+			if (x > 0 && y > 0) {
+				return arctg;
+			} else if (x < 0 && y > 0) {
+				return arctg + 180;
+			} else if (x < 0 && y < 0) {
+				return arctg + 180;
+			} else if (x > 0 && y < 0) {
+				return arctg + 360;
+			};
+		},
+		getSector: function (x, y) {
+			const r2 = x * x + y * y;
+			const deg = this.getDegrees(x, y);
+			let sector = 0;
+			if (deg < 9 || deg > 351) {
+				sector = 6;
+			} else {
+				for (let i = 0; i < 20; i++) {
+					if (deg > this.sectors[i].startDeg) {
+						sector = this.sectors[i].points;
+					}
+				}
+			};
+			console.log(Math.sqrt(r2));
+
+			if (r2 < 625) {
+				return { sector: 25, mult: 2 };
+			} else if (r2 < 2500) {
+				return { sector: 25, mult: 1 }
+			} else if (r2 < 150 * 150) {
+				return { sector: sector, mult: 'small' }
+			} else if (r2 < 175 * 175) {
+				return { sector: sector, mult: 3 }
+			} else if (r2 < 250 * 250) {
+				return { sector: sector, mult: 'big' }
+			} else if (r2 < 275 * 275) {
+				return { sector: sector, mult: 2 }
+			} else if (r2 < 300 * 300) {
+				return { sector: 0, mult: 0 }
+			}
+		},
+		drawSector: function drawSector (corner, r, R, color) {
+			function getRadians(degrees) {
+				return (Math.PI/180)*degrees;
+			}
+			const canv = document.getElementById('field');
+			const ctx = canv.getContext('2d');
+			ctx.beginPath();
+			ctx.strokeStyle = '#666666';
+			ctx.fillStyle = color;
+			ctx.moveTo(300 + Math.cos(getRadians(corner)) * r, 300 + Math.sin(getRadians(corner)) * r);
+			ctx.lineTo(300 + Math.cos(getRadians(corner)) * R, 300 + Math.sin(getRadians(corner)) * R);
+			ctx.arc(300, 300, R, getRadians(corner), getRadians(corner + 18) , false);
+			ctx.lineTo(300 + Math.cos(getRadians(corner + 18)) * r, 300 + Math.sin(getRadians(corner + 18)) * r);
+			ctx.arc(300, 300, r, getRadians(corner + 18), getRadians(corner), true);
+			ctx.stroke();
+			ctx.fill();
+		},
+		boom: function boom (e) {
+			const x = e.clientX - document.querySelector('#field').getBoundingClientRect().left;
+			const y = e.clientY - document.querySelector('#field').getBoundingClientRect().top;
+			const canv = document.getElementById('field');
+			const ctx = canv.getContext('2d');
+			ctx.beginPath();
+			ctx.fillStyle = 'magenta';
+			console.log(this.getSector(x - 300, 300 - y));
+			ctx.arc(x, y, 4, 0, Math.PI * 2, true)
+			ctx.fill();
+		}
 	},
 	mounted: function () {
-		$.ajax({
-			url: 'https://darts-api.herokuapp.com/api/v1/users_list/?format=json',
-			method: 'GET',
-			data: null,
-			cached: false,
-			success: function(data){
-				for (let i = 0; i < data.length; i++) {
-					const newPlayer = {
-						id: darts.players.length + 1,
-						idDB: data[i].user_id.id,
-						name: data[i].user_id.first_name,
-						points: 0,
-						totalPoints: 0,
-						avatar: data[i].avatar,
-						picked: false,
-						statsShown: false,
-						stats: {
-							shoots: 0, points: 0, zero: 0, misshot: 0, oneshot: 0, twoshot: 0, threeshot: 0, another: 0, single: 0, double: 0, triple: 0, outer: 0, inner: 0, accuracy: 0, sibling: 0, small: 0, big: 0, middleMiss: 0,
-						},
-						globalShown: false,
-						globalStats: {
-							shoots: 0, points: 0, zero: 0, misshot: 0, oneshot: 0, twoshot: 0, threeshot: 0, another: 0, single: 0, double: 0, triple: 0, outer: 0, inner: 0, accuracy: 0, sibling: 0, maxScores: 0, minScores: 9999, games: 0, small: 0, big: 0, middleMiss:0,
-						}
-					}
-					for (stat in newPlayer.globalStats) {
-						newPlayer.globalStats[stat] = data[i][stat];
-					}
-					darts.players.push(newPlayer);
-				}
-				for (let i = 1; i < 96; i++) {
-					if (darts.checkAvatar(i)) {
-						continue;
-					}
-					let img = '<img src="img/avatars/' + i + '.png" alt="' + i + '" class="avatar" data-number="' + i + '">'
-					$('.avatar-lib .nano-content').append(img);
-				};
-				$('.avatar-lib .avatar').on('click', function() {
-					darts.pickAvatar($(this).attr('data-number'))
-				});
-			},
-			error: function(err){
-				console.log(err.responseText);
-				darts.showMessage('Не удалось получить список игроков')
+		const canv = document.getElementById('field');
+		const ctx = canv.getContext('2d');
+		const dark = '#070707',
+		      grey = '#101010',
+		      light = '#FEDC9F',
+		      red = '#990000',
+					green = '#006600';
+		const img = new Image();
+		// img.src = '../images/numbers.png'
+		function circle (radius, color, border = '#666666') {
+			ctx.beginPath();
+			ctx.fillStyle = color;
+			ctx.strokeStyle = border;
+			ctx.arc(300, 300, radius, 0, 2*Math.PI, false);
+			ctx.fill();
+			ctx.stroke();
+		}
+		circle(300, dark, null);
+		circle(50, green);
+		circle(25, red);
+
+		for (let i = 0; i < 20; i ++) {
+			if (i % 2) {
+				this.drawSector(-9 + 18 * i, 150, 175, red);
+				this.drawSector(-9 + 18 * i, 250, 275, red);
+			} else {
+				this.drawSector(-9 + 18 * i, 175, 250, light);
+				this.drawSector(-9 + 18 * i, 50, 150, light);
+				this.drawSector(-9 + 18 * i, 150, 175, green);
+				this.drawSector(-9 + 18 * i, 250, 275, green);
 			}
-		})
-	},
-	beforeCreate() {
+		}
+
+
+
+
+		// $.ajax({
+		// 	url: 'https://darts-api.herokuapp.com/api/v1/users_list/?format=json',
+		// 	method: 'GET',
+		// 	data: null,
+		// 	cached: false,
+		// 	success: function(data){
+		// 		for (let i = 0; i < data.length; i++) {
+		// 			const newPlayer = {
+		// 				id: darts.players.length + 1,
+		// 				idDB: data[i].user_id.id,
+		// 				name: data[i].user_id.first_name,
+		// 				points: 0,
+		// 				totalPoints: 0,
+		// 				avatar: data[i].avatar,
+		// 				picked: false,
+		// 				statsShown: false,
+		// 				stats: {
+		// 					shoots: 0, points: 0, zero: 0, misshot: 0, oneshot: 0, twoshot: 0, threeshot: 0, another: 0, single: 0, double: 0, triple: 0, outer: 0, inner: 0, accuracy: 0, sibling: 0, small: 0, big: 0, middleMiss: 0,
+		// 				},
+		// 				globalShown: false,
+		// 				globalStats: {
+		// 					shoots: 0, points: 0, zero: 0, misshot: 0, oneshot: 0, twoshot: 0, threeshot: 0, another: 0, single: 0, double: 0, triple: 0, outer: 0, inner: 0, accuracy: 0, sibling: 0, maxScores: 0, minScores: 9999, games: 0, small: 0, big: 0, middleMiss:0,
+		// 				}
+		// 			}
+		// 			for (stat in newPlayer.globalStats) {
+		// 				newPlayer.globalStats[stat] = data[i][stat];
+		// 			}
+		// 			darts.players.push(newPlayer);
+		// 		}
+		// 		for (let i = 1; i < 96; i++) {
+		// 			if (darts.checkAvatar(i)) {
+		// 				continue;
+		// 			}
+		// 			let img = '<img src="img/avatars/' + i + '.png" alt="' + i + '" class="avatar" data-number="' + i + '">'
+		// 			$('.avatar-lib .nano-content').append(img);
+		// 		};
+		// 		$('.avatar-lib .avatar').on('click', function() {
+		// 			darts.pickAvatar($(this).attr('data-number'))
+		// 		});
+		// 	},
+		// 	error: function(err){
+		// 		console.log(err.responseText);
+		// 		darts.showMessage('Не удалось получить список игроков')
+		// 	}
+		// })
 	},
 })
 
 $(document).ready(function() {
-	$(".nano").nanoScroller({falsh:true });
+	// $(".nano").nanoScroller({falsh:true });
 	// $($('.player-pick')[0]).click();
-	setTimeout(function() {
-		$($('.player-pick')).click();$('.start-play').click();}, 500);
+	// setTimeout(function() {
+	// 	$($('.player-pick')).click();$('.start-play').click();}, 500);
 });

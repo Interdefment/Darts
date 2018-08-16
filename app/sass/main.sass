@@ -2,6 +2,10 @@
 @import "fonts"
 @import "libs"
 
+@import "pick"
+@import "asides"
+@import "player"
+
 ::placeholder
 	color: #666
 
@@ -122,42 +126,7 @@ body
 		transform-origin: 0 50%
 		transform: rotateZ(-45deg) translate(-1px, 2px)
 
-.pick
-	position: fixed
-	width: 1006px
-	height: 606px
-	top: 50%
-	left: 50%
-	transform: translate(-50%, -50%)
-	background: url(../img/bg-pick.jpg) center center no-repeat #2A2627
-	box-shadow: 5px 5px 14px #000
-	border: 3px solid #000000
-	background-size: cover
-	z-index: 901
-	padding: 30px 20px
-	// font-family: 	Beresta, 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif
-	&-players-list
-		position: relative
-		margin: 0
-		width: 700px
-		height: 480px
-		padding: 0px 20px 30px
-		float: left
-		.nano-content
-			padding: 30px
-			padding-top: 10px
-			padding-left: 10px
-	&-avatar
-		width: 60px
-		height: 60px
-	h6
-		font-size: 20px
-		color: #ffffff
-		text-align: center
-		padding-bottom: 30px
-		line-height: 1
-		text-transform: uppercase
-		letter-spacing: 1px
+
 .statistic
 	position: fixed
 	background: #ffffff
@@ -245,163 +214,8 @@ body
 		border: 1px solid $grey
 		box-shadow: 1px 1px 5px #3f0000
 
-.player
-	position: relative
-	width: 200px
-	height: 70px
-	padding: 4px
-	border: 1px solid #ccc
-	background: rgba(255, 255, 255, .15)
-	margin-bottom: 20px
-	cursor: pointer
-	color: #ffffff
-	text-shadow: 1px 1px 1px #000000
-	transition: all .5s linear
-	display: flex
-	overflow: hidden
-	// font-family: Beresta
-	img
-		float: left
-	&-name
-		display: table-cell
-		height: 60px
-		vertical-align: middle
-		font-size: 18px
-		padding-left: 10px
-	&-pick
-		display: inline-block
-		margin-left: 20px
-	&-choosen
-		width: 220px
-		display: block
-	&-active
-		width: 330px
-		cursor: default
-		border-color: white
-		box-shadow: 1px 1px 4px #fff
-		&-wrapper
-			width: 200px
-			height: 60px
-			position: absolute
-		&-list
-			//SLEVA
-			position: fixed
-			height: 100%
-			width: 370px
-			// background: $aside-bg
-			background: url(../img/bg1.jpg) no-repeat left center #262626
-			background-size: cover
-			padding: 20px
-			z-index: 10
-			box-shadow: 0px 0 4px 5px $grey, inset -5px 0 13px $grey
-			border-right: 2px solid $grey
-			.nano-content
-				height: calc(100% - 80px)
-				top: 20px
-				left: 20px
-	&-record
-		width: 330px
-		cursor: default
-		border-color: white
-		&-list
-			position: fixed
-			height: 100%
-			width: 370px
-			padding-left: 0
-			z-index: 10
-			.nano-content
-				padding-top: 20px
-			.player-active p.player-points
-				line-height: 60px
-				top: 3px
-				vertical-align: middle
-	&-stats
-		position: absolute
-		width: 30px
-		height: 30px
-		top: 35px
-		right: 80px
-		cursor: pointer
-	p.player-points
-		position: absolute
-		right: 40px
-		top: 6px
-		line-height: 1
-		font-size: 20px
-	&.active
-		box-shadow: 3px 3px 5px #0a0
-		border-color: #090
-		background: #00990044
-	&.gold
-		box-shadow: 3px 3px 5px  $gold
-		border-color: $gold
-		background: #ffd70098
-	&.silver
-		box-shadow: 3px 3px 5px  $silver
-		border-color: $silver
-		background: #c0c0c098
-	&.bronze
-		box-shadow: 3px 3px 5px  $bronze
-		border-color: $bronze
-		background: #cd7f3298
-	&-info
-		position: relative
-		width: 100%
-		margin-top: 65px
-		color: #ffffff
-		text-shadow: 1px 1px 1px #000000
-		letter-spacing: 1px
-		font-size: 17px
-		padding: 0px 10px 10px 75px
-		span
-			color: #090
-			// font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif
-			&.red
-				color: #900
-		&-global
-			position: absolute
-			right: 0
-			top: 0px
-			font-size: 15px
-			text-decoration: underline
-			cursor: pointer
-			color: #aaf
-	&.showstat
-		height: 480px
-		.set
-			padding-left: 15px
-			&-start
-				padding-top: 8px
-		&.global
-			height: 550px
-			.player-info-global
-				color: #090
 
 
-.game
-	//SPRAVA
-	position: fixed
-	height: 100%
-	width: 370px
-	right: 0
-	// background: $aside-bg
-	background: url(../img/bg1.jpg) no-repeat right center #262626
-	background-size: cover
-	padding: 20px
-	z-index: 10
-	box-shadow: 0px 0 4px 5px $grey, inset 5px 0 13px $grey
-	border-left: 2px solid $grey
-	// font-family: Beresta
-	letter-spacing: 1px
-	&-labels
-		p
-			font-size: 30px
-			color: white
-			padding-bottom: 20px
-		h6
-			font-size: 25px
-			color: white
-			text-align: center
 .turn
 	&-end
 		position: fixed
@@ -480,124 +294,124 @@ body
 
 
 #field
-	width: 600px
-	height: 600px
-	border-radius: 50%
-	background: $dark url(../img/numbers.png) no-repeat center center
-	margin-left: 50%
+	// width: 600px
+	// height: 300px
+	// background: $dark url(../img/numbers.png) no-repeat center center
+	// margin-left: 50%
+	margin: 10px
 	position: relative
 	overflow: hidden
-	transform: rotateZ(-9deg) translate(-50%, -40px)
-	box-shadow: 5px 5px 10px #000000
-	&::before
-		display: block
-		position: absolute
-		width: 100%
-		height: 100%
-		margin: 0
-		background: url(../img/numbers.png) no-repeat center center
-	&.container
-		margin: 0
-		z-index: 20
-		&>.sector
-			border: none
-			vertical-align: top
-			color: #fff
-.container
-	width: 550px
-	height: 550px
-	overflow: hidden !important
-	border-radius: 50%
-	position: relative
-	margin-top: 50%
-	margin-left: 50%
-	transform: translate(-50%, -50%)
-	border: 2px solid $border
-.x2
-	z-index: 1
-	&>.sector
-		&:nth-of-type(2n + 1)
-			background: $red
-			&:hover
-				background: $red + #ff0000
-		&:nth-of-type(2n)
-			background: $green
-			&:hover
-				background: $green + #114411
-.big
-	width: 500px
-	height: 500px
-	z-index: 2
-	&>.sector
-		&:nth-of-type(2n + 1)
-			background: $dark
-			&:hover
-				background: $dark + #222222
-		&:nth-of-type(2n)
-			background: $light
-			&:hover
-				background: $light - #333333
-.x3
-	width: 325px
-	height: 325px
-	z-index: 3
-	&>.sector
-		&:nth-of-type(2n + 1)
-			background: $red
-			&:hover
-				background: $red + #ff0000
-		&:nth-of-type(2n)
-			background: $green
-			&:hover
-				background: $green + #114411
+	// transform: translate(-50%, 20px)
+	// box-shadow: 5px 5px 10px #000000
+// 	&::before
+// 		display: block
+// 		position: absolute
+// 		width: 100%
+// 		height: 100%
+// 		margin: 0
+// 		background: url(../img/numbers.png) no-repeat center center
+// 	&.container
+// 		margin: 0
+// 		z-index: 20
+// 		&>.sector
+// 			border: none
+// 			vertical-align: top
+// 			color: #fff
+// .container
+// 	width: 550px
+// 	height: 550px
+// 	overflow: hidden !important
+// 	border-radius: 50%
+// 	position: relative
+// 	margin-top: 50%
+// 	margin-left: 50%
+// 	transform: translate(-50%, -50%)
+// 	border: 2px solid $border
+// .x2
+// 	z-index: 1
+// 	&>.sector
+// 		&:nth-of-type(2n + 1)
+// 			background: $red
+// 			&:hover
+// 				background: $red + #ff0000
+// 		&:nth-of-type(2n)
+// 			background: $green
+// 			&:hover
+// 				background: $green + #114411
+// .big
+// 	width: 500px
+// 	height: 500px
+// 	z-index: 2
+// 	&>.sector
+// 		&:nth-of-type(2n + 1)
+// 			background: $dark
+// 			&:hover
+// 				background: $dark + #222222
+// 		&:nth-of-type(2n)
+// 			background: $light
+// 			&:hover
+// 				background: $light - #333333
+// .x3
+// 	width: 325px
+// 	height: 325px
+// 	z-index: 3
+// 	&>.sector
+// 		&:nth-of-type(2n + 1)
+// 			background: $red
+// 			&:hover
+// 				background: $red + #ff0000
+// 		&:nth-of-type(2n)
+// 			background: $green
+// 			&:hover
+// 				background: $green + #114411
 
-.small
-	width: 275px
-	height: 275px
-	z-index: 4
-	&>.sector
-		&:nth-of-type(2n + 1)
-			background: $dark
-			&:hover
-				background: $dark + #222222
-		&:nth-of-type(2n)
-			background: $light
-			&:hover
-				background: $light - #333333
-.mid25
-	position: relative
-	width: 100px
-	height: 100px
-	top: 50%
-	left: 50%
-	transform: translate(-50%, -50%)
-	z-index: 5
-	border-radius: 50%
-	background: $green
-	border: 2px solid $border
-	position: absolute
-	&:hover
-		background: $green + #114411
-.mid50
-	position: relative
-	width: 50px
-	height: 50px
-	top: 50%
-	left: 50%
-	transform: translate(-50%, -50%)
-	z-index: 6
-	border-radius: 50%
-	background: $red
-	border: 2px solid $border
-	position: absolute
-	&:hover
-		background: $red + #ff0000
-.sector
-	width: 50%
-	height: 50%
-	position: absolute
-	transform-origin: left bottom
-	left: 50%
-	top: 0
-	border: 2px solid $border
+// .small
+// 	width: 275px
+// 	height: 275px
+// 	z-index: 4
+// 	&>.sector
+// 		&:nth-of-type(2n + 1)
+// 			background: $dark
+// 			&:hover
+// 				background: $dark + #222222
+// 		&:nth-of-type(2n)
+// 			background: $light
+// 			&:hover
+// 				background: $light - #333333
+// .mid25
+// 	position: relative
+// 	width: 100px
+// 	height: 100px
+// 	top: 50%
+// 	left: 50%
+// 	transform: translate(-50%, -50%)
+// 	z-index: 5
+// 	border-radius: 50%
+// 	background: $green
+// 	border: 2px solid $border
+// 	position: absolute
+// 	&:hover
+// 		background: $green + #114411
+// .mid50
+// 	position: relative
+// 	width: 50px
+// 	height: 50px
+// 	top: 50%
+// 	left: 50%
+// 	transform: translate(-50%, -50%)
+// 	z-index: 6
+// 	border-radius: 50%
+// 	background: $red
+// 	border: 2px solid $border
+// 	position: absolute
+// 	&:hover
+// 		background: $red + #ff0000
+// .sector
+// 	width: 50%
+// 	height: 50%
+// 	position: absolute
+// 	transform-origin: left bottom
+// 	left: 50%
+// 	top: 0
+// 	border: 2px solid $border
 
