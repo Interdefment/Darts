@@ -515,6 +515,6 @@ var darts = new Vue({
 $(document).ready(function() {
 	$(".nano").nanoScroller({falsh:true });
 	// $($('.player-pick')[0]).click();
-	setTimeout(function() {
-		$($('.player-pick')).click();$('.start-play').click();}, 500);
+	// setTimeout(function() {
+	// 	$($('.player-pick')).click();$('.start-play').click();}, 500);
 });
